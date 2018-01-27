@@ -5,8 +5,9 @@ public class BankAccount {
     public String customerName;
     public char[] password;
 
-    public BankAccount(int accountNumber, String customerName, char[] password) {
+    public BankAccount(int accountNumber, double accountBalance, String customerName, char[] password) {
         this.accountNumber = accountNumber;
+        this.accountBalance = accountBalance;
         this.customerName = customerName;
         this.password = password;
     }
