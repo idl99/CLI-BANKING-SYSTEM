@@ -1,9 +1,9 @@
 public class BankAccount {
 
-    public int accountNumber;
-    public double accountBalance;
-    public String customerName;
-    public char[] password;
+    private int accountNumber;
+    private double accountBalance;
+    private String customerName;
+    private char[] password;
 
     public BankAccount(int accountNumber, double accountBalance, String customerName, char[] password) {
         this.accountNumber = accountNumber;
