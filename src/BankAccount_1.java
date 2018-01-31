@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,18 +12,34 @@ public class BankAccount_1 {
         List<BankAccount> listOfBankAcc = new ArrayList<>();
 
         while (true) {
-            System.out.print(
-                    "========================================\n"+
-                    "WELCOME TO INTERBANKING PTY SYSTEM\n"+
-                    "========================================\n"+
-                    "1. CREATE NEW BANK ACCOUNT \n"+
-                    "2. VIEW ACCOUNT BALANCE \n"+
-                    "\nPLEASE ENTER THE NUMBER CORRESPONDING TO YOUR DESIRED COMMAND OR 0 TO EXIT: "
-            );
 
-            int opt = sc.nextInt();
+            int opt;
 
-            if (opt == 0) break;
+            while (true) {
+                try {
+                    System.out.print(
+                            "========================================\n"+
+                            "WELCOME TO INTERBANKING PTY SYSTEM\n"+
+                            "========================================\n"+
+                            "1. CREATE NEW BANK ACCOUNT \n"+
+                            "2. VIEW ACCOUNT BALANCE \n"+
+                            "\nPLEASE ENTER MENU OPTION NUMBER OR 0 TO EXIT: "
+                    );
+
+                    opt = sc.nextInt();
+
+                    if(opt>2){
+                        System.out.println("Non-existing option. Please re-enter menu option below.\n");
+                    }
+                    else break;
+
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please re-enter menu option number below.\n");
+                }
+                sc.nextLine();
+            }
+
+            if(opt==0) break;
 
             System.out.println();
 
@@ -36,37 +53,33 @@ public class BankAccount_1 {
 
                     System.out.print("Enter Account number: ");
                     int accountNumber = sc.nextInt();
-                    System.out.println("Your account number is "+accountNumber);
-
-                    System.out.println();
+                    sc.nextLine();
+                    System.out.println("Your account number is "+accountNumber+"\n");
 
                     System.out.print("Enter Customer name: ");
-                    String customerName = sc.next();
-                    sc.nextLine();
-                    System.out.println("Your name is "+customerName);
-
-                    System.out.println();
+                    String customerName = sc.nextLine();
+                    System.out.println("Your name is "+customerName+"\n");
 
                     System.out.print("Enter starting A/C balance: ");
                     double accountBalance = sc.nextDouble();
-                    System.out.println("Your starting account balance is "+accountBalance);
-
-                    System.out.println();
+                    sc.nextLine();
+                    System.out.println("Your starting account balance is "+accountBalance+"\n");
 
                     System.out.print("Enter Account password: ");
                     char[] password = sc.next().toCharArray();
                     System.out.print("Your password is ");
+
                     for (int i=0; i<password.length; i++){
                         System.out.print(password[i]);
                     }
-
-                    System.out.println("\n\nBANK ACCOUNT NUMBER "+accountNumber+" SUCCESSFULLY CREATED");
 
                     BankAccount account = new BankAccount(
                             accountNumber, accountBalance,
                             customerName, password);
 
                     listOfBankAcc.add(account);
+
+                    System.out.println("\n\nBANK ACCOUNT NUMBER "+accountNumber+" SUCCESSFULLY CREATED"+"\n");
 
                     break;
 
@@ -79,12 +92,17 @@ public class BankAccount_1 {
 
                     System.out.println();
 
+                    boolean isFound = false;
+
                     for(BankAccount bankAccount: listOfBankAcc){
                         if(bankAccount.getAccountNumber() == input_accNo
                                 && bankAccount.getCustomerName().equals(input_customerName)){
                             System.out.println("Your account balance is: "+bankAccount.getAccountBalance());
+                            isFound = true;
                         }
                     }
+
+                    if(!isFound) System.out.println("Invalid account number or customer name. Please try again.\n");
 
                     break;
             }
