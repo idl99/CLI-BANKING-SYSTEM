@@ -56,14 +56,14 @@ public class BankAccount_1 {
                     sc.nextLine();
                     System.out.println("Your account number is "+accountNumber+"\n");
 
-                    System.out.print("Enter Customer name: ");
-                    String customerName = sc.nextLine();
-                    System.out.println("Your name is "+customerName+"\n");
-
                     System.out.print("Enter starting A/C balance: ");
                     double accountBalance = sc.nextDouble();
                     sc.nextLine();
                     System.out.println("Your starting account balance is "+accountBalance+"\n");
+
+                    System.out.print("Enter Customer name: ");
+                    String customerName = sc.nextLine();
+                    System.out.println("Your name is "+customerName+"\n");
 
                     System.out.print("Enter Account password: ");
                     char[] password = sc.next().toCharArray();
