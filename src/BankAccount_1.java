@@ -61,7 +61,9 @@ public class BankAccount_1 {
                     System.out.print("Enter starting A/C balance: ");
                     double accountBalance = sc.nextDouble();
                     sc.nextLine();
-                    System.out.println("Your starting account balance is "+accountBalance+"\n");
+                    System.out.print("Your starting account balance is ");
+                    System.out.printf("%,.2f",accountBalance);
+                    System.out.println("\n");
 
                     System.out.print("Enter Customer name: ");
                     String customerName = sc.nextLine();
@@ -101,7 +103,9 @@ public class BankAccount_1 {
                         if(bankAccount.getAccountNumber() == input_accNo
                                 && bankAccount.getCustomerName().equals(input_customerName)){
                             // Account exists
-                            System.out.println("Your account balance is: "+bankAccount.getAccountBalance());
+                            System.out.print("Your account balance is: ");
+                            System.out.printf("%,.2f",bankAccount.getAccountBalance());
+                            System.out.println();
                             isFound = true;
                         }
                     }
