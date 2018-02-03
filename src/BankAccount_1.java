@@ -5,11 +5,13 @@ import java.util.Scanner;
 
 public class BankAccount_1 {
 
+    // Tester class for Bank Account objects
+
     public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
 
-        List<BankAccount> listOfBankAcc = new ArrayList<>();
+        List<BankAccount> listOfBankAcc = new ArrayList<>(); // Arraylist to store BankAccount objects
 
         while (true) {
 
@@ -77,7 +79,7 @@ public class BankAccount_1 {
                             accountNumber, accountBalance,
                             customerName, password);
 
-                    listOfBankAcc.add(account);
+                    listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
 
                     System.out.println("\n\nBANK ACCOUNT NUMBER "+accountNumber+" SUCCESSFULLY CREATED"+"\n");
 
@@ -92,16 +94,19 @@ public class BankAccount_1 {
 
                     System.out.println();
 
-                    boolean isFound = false;
+                    boolean isFound = false; // true if BankAccount exists for input account number and name
 
                     for(BankAccount bankAccount: listOfBankAcc){
+                        // Loop to iterate through list of existing Bank Accounts
                         if(bankAccount.getAccountNumber() == input_accNo
                                 && bankAccount.getCustomerName().equals(input_customerName)){
+                            // Account exists
                             System.out.println("Your account balance is: "+bankAccount.getAccountBalance());
                             isFound = true;
                         }
                     }
 
+                    //existing BankAccount not found for input account numebr and name
                     if(!isFound) System.out.println("Invalid account number or customer name. Please try again.\n");
 
                     break;
