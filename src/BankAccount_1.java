@@ -100,11 +100,11 @@ public class BankAccount_1 {
 
                     for(BankAccount bankAccount: listOfBankAcc){
                         // Loop to iterate through list of existing Bank Accounts
-                        if(bankAccount.getAccountNumber() == input_accNo
-                                && bankAccount.getCustomerName().equals(input_customerName)){
+                        if(bankAccount.accountNumber == input_accNo
+                                && bankAccount.customerName.equals(input_customerName)){
                             // Account exists
                             System.out.print("Your account balance is: ");
-                            System.out.printf("%,.2f",bankAccount.getAccountBalance());
+                            System.out.printf("%,.2f",bankAccount.accountBalance);
                             System.out.println();
                             isFound = true;
                         }
