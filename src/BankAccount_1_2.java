@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class BankAccount_1 {
+public class BankAccount_1_2 {
 
     // Tester class for Bank Account objects
 
@@ -15,39 +14,27 @@ public class BankAccount_1 {
 
         while (true) {
 
-            int opt;
+            char opt;
 
-            while (true) {
-                try {
-                    System.out.print(
-                            "========================================\n"+
-                            "WELCOME TO INTERBANKING PTY SYSTEM\n"+
-                            "========================================\n"+
-                            "1. CREATE NEW BANK ACCOUNT \n"+
-                            "2. VIEW ACCOUNT BALANCE \n"+
-                            "\nPLEASE ENTER MENU OPTION NUMBER OR 0 TO EXIT: "
-                    );
+            System.out.print(
+                    "========================================\n"+
+                    "WELCOME TO INTERBANKING PTY SYSTEM\n"+
+                    "========================================\n"+
+                    "1. CREATE NEW BANK ACCOUNT \n"+
+                    "2. VIEW ACCOUNT BALANCE \n"+
+                    "\nPLEASE ENTER MENU OPTION NUMBER OR 0 TO EXIT: "
+            );
 
-                    opt = sc.nextInt();
+            opt = sc.nextLine().toCharArray()[0];
 
-                    if(opt>2){
-                        System.out.println("Non-existing option. Please re-enter menu option below.\n");
-                    }
-                    else break;
-
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid input. Please re-enter menu option number below.\n");
-                }
-                sc.nextLine();
-            }
-
-            if(opt==0) break;
+            if(opt=='0') break;
 
             System.out.println();
 
             switch (opt){
 
-                case 1:
+                case '1':
+
                     System.out.println(
                             "==============================\n" +
                             "NEW BANK ACCOUNT FORM\n" +
@@ -85,9 +72,12 @@ public class BankAccount_1 {
 
                     System.out.println("\n\nBANK ACCOUNT NUMBER "+accountNumber+" SUCCESSFULLY CREATED"+"\n");
 
+                    sc.nextLine();
+
                     break;
 
-                case 2:
+                case '2':
+
                     System.out.print("Enter your account number: ");
                     int input_accNo = sc.nextInt();
                     sc.nextLine();
@@ -105,7 +95,7 @@ public class BankAccount_1 {
                             // Account exists
                             System.out.print("Your account balance is: ");
                             System.out.printf("%,.2f",bankAccount.accountBalance);
-                            System.out.println();
+                            System.out.println("\n");
                             isFound = true;
                         }
                     }
@@ -113,6 +103,10 @@ public class BankAccount_1 {
                     //existing BankAccount not found for input account numebr and name
                     if(!isFound) System.out.println("Invalid account number or customer name. Please try again.\n");
 
+                    break;
+
+                default:
+                    System.out.println("Invalid Input. Please re-enter menu option below.");
                     break;
             }
         }
