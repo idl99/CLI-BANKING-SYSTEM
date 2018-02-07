@@ -9,7 +9,7 @@ public class BankAccount_1_2 {
 
     static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
 
-    public static void processMoneyTransfer (int fromAcc, int toAcc, int transactVal)
+    public static void processMoneyTransfer (int fromAcc, int toAcc, double transactVal)
             throws Exception{
 
         if(fromAcc == toAcc){
@@ -39,19 +39,24 @@ public class BankAccount_1_2 {
         // 5.    If fromAccount balance falls below $10
         //          then issue warning message about low a/c balance
         if(fromBankAcc.accountBalance - transactVal <= 10) System.out.println("WARNING: Your account balance has " +
-                "dropped below $10.");
+                "dropped below $10.\n");
 
         // 6.    If toAccount balance falls above $100,000
         //          then issue warning message about federal insurance
         if (toBankAcc.accountBalance + transactVal > 100000) System.out.println("WARNING: Your account balance has " +
-                "gone beyond the maximum federally insured value.");
+                "gone beyond the maximum federally insured value.\n");
 
         // 7.    Display the ending messages
         //
         // NOTE: For errors, program should terminate GRACEFULLY, for warning
         //          messages, the program continues to execute
 
-        System.out.println();
+        fromBankAcc.accountBalance -= transactVal;
+        toBankAcc.accountBalance += transactVal;
+
+        System.out.printf("AMOUNT OF %.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
+                "YOUR NEW ACCOUNT BALANCE IS %.2f",transactVal,fromAcc,toAcc,fromBankAcc.accountBalance);
+
     }
 
     public static void main(String[] args){
@@ -192,7 +197,7 @@ public class BankAccount_1_2 {
                     // 3. Get amount to transfer
 
                     System.out.print("ENTER AMOUNT OF FUNDS TO TRANSFER: ");
-                    int transferVal = sc.nextInt();
+                    double transferVal = sc.nextDouble();
                     sc.nextLine();
 
                     System.out.println();
@@ -202,6 +207,8 @@ public class BankAccount_1_2 {
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                         System.exit(0);
+                    } finally{
+                        System.out.println();
                     }
 
                     break;
