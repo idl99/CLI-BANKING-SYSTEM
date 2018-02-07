@@ -7,11 +7,64 @@ public class BankAccount_1_2 {
 
     // Tester class for Bank Account objects
 
+    static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
+
+    public static void processMoneyTransfer (int fromAcc, int toAcc, int transactVal)
+            throws Exception{
+
+        if(fromAcc == toAcc){
+            throw new Exception("Both account numbers are same");
+        }
+
+        BankAccount fromBankAcc = null;
+        BankAccount toBankAcc = null;
+
+        for(BankAccount acc : listOfBankAcc){
+            if(acc.accountNumber == fromAcc) fromBankAcc = acc;
+            else if(acc.accountNumber == toAcc) toBankAcc = acc;
+        }
+
+        if(fromBankAcc == null) {
+            throw new Exception("THE ACCOUNT NUMBER FROM WHICH YOU ARE " +
+                    "TRANSFERRING FUNDS DOESN'T EXIST");
+        } else if(toBankAcc == null) {
+            throw new Exception("THE ACCOUNT NUMBER TO YOU ARE " +
+                    "TRANSFERRING FUNDS DOESN'T EXIST");
+        }
+
+        // 4.    If fromAccount balance falls below $0 after deduction
+        //          then cancel transaction
+        if(fromBankAcc.accountBalance - transactVal < 0) throw new Exception("Insufficient funds in account");
+
+        // 5.    If fromAccount balance falls below $10
+        //          then issue warning message about low a/c balance
+        if(fromBankAcc.accountBalance - transactVal <= 10) System.out.println("WARNING: Your account balance has " +
+                "dropped below $10.");
+
+        // 6.    If toAccount balance falls above $100,000
+        //          then issue warning message about federal insurance
+        if (toBankAcc.accountBalance + transactVal > 100000) System.out.println("WARNING: Your account balance has " +
+                "gone beyond the maximum federally insured value.");
+
+        // 7.    Display the ending messages
+        //
+        // NOTE: For errors, program should terminate GRACEFULLY, for warning
+        //          messages, the program continues to execute
+
+        System.out.println();
+    }
+
     public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
 
-        List<BankAccount> listOfBankAcc = new ArrayList<>(); // Arraylist to store BankAccount objects
+        listOfBankAcc = new ArrayList<BankAccount>(){};
+        listOfBankAcc.add(new BankAccount(
+                1000, 85000, "Ihan Lelwala", new char[]{'i','h','a','n'}
+        ));
+        listOfBankAcc.add(new BankAccount(
+                1001, 25000, "John Doe", new char[]{'j','o','h','n'}
+        ));
 
         while (true) {
 
@@ -64,7 +117,7 @@ public class BankAccount_1_2 {
                     System.out.print("Enter starting A/C balance: ");
                     double accountBalance = sc.nextDouble();
                     sc.nextLine();
-                    System.out.print("Your starting account balance is ");
+                    System.out.print("Your starting account balance is $");
                     System.out.printf("%,.2f",accountBalance);
                     System.out.println("\n");
 
@@ -109,7 +162,7 @@ public class BankAccount_1_2 {
                         if(bankAccount.accountNumber == input_accNo
                                 && bankAccount.customerName.equals(input_customerName)){
                             // Account exists
-                            System.out.print("Your account balance is: ");
+                            System.out.print("Your account balance is: $");
                             System.out.printf("%,.2f",bankAccount.accountBalance);
                             System.out.println("\n");
                             isFound = true;
@@ -144,16 +197,12 @@ public class BankAccount_1_2 {
 
                     System.out.println();
 
-                    // 4.    If fromAccount balance falls below $0 after deduction
-                    //          then cancel transaction
-                    // 5.    If fromAccount balance falls below $10
-                    //          then issue warning message about low a/c balance
-                    // 6.    If toAccount balance falls above $100,000
-                    //          then issue warning message about federal insurance
-                    // 7.    Display the ending messages
-                    //
-                    // NOTE: For errors, program should terminate GRACEFULLY, for warning
-                    //          messages, the program continues to execute
+                    try {
+                        processMoneyTransfer(fromAccount,toAccount,transferVal);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        System.exit(0);
+                    }
 
                     break;
 
