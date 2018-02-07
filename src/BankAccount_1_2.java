@@ -55,7 +55,9 @@ public class BankAccount_1_2 {
         toBankAcc.accountBalance += transactVal;
 
         System.out.printf("AMOUNT OF %.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
-                "YOUR NEW ACCOUNT BALANCE IS %.2f",transactVal,fromAcc,toAcc,fromBankAcc.accountBalance);
+                "TRANSFERRER'S NEW ACCOUNT BALANCE IS %.2f\n\n" +
+                "RECIPIENT'S NEW ACCOUNT BALANCE IS %.2f",
+                transactVal,fromAcc,toAcc,fromBankAcc.accountBalance, toBankAcc.accountBalance);
 
     }
 
@@ -174,7 +176,7 @@ public class BankAccount_1_2 {
                         }
                     }
 
-                    //existing BankAccount not found for input account numebr and name
+                    //existing BankAccount not found for input account number and name
                     if(!isFound) System.out.println("Invalid account number or customer name. Please try again.\n");
 
                     break;
