@@ -23,7 +23,7 @@ public class BankAccount_1_2 {
                     "========================================\n"+
                     "1. CREATE NEW BANK ACCOUNT \n"+
                     "2. VIEW ACCOUNT BALANCE \n" +
-                    "3. ACCOUNT MONEY TRANSFER"+
+                    "3. ACCOUNT MONEY TRANSFER \n"+
                     "\nPLEASE ENTER MENU OPTION NUMBER OR 0 TO EXIT: "
             );
 
@@ -123,17 +123,38 @@ public class BankAccount_1_2 {
 
                 case '3':
                     // 1. Get account to transfer money from as fromAccount
+
+                    System.out.print("ENTER A/C NUMBER OF ACCOUNT TO TRANSFER MONEY FROM: ");
+                    int fromAccount = sc.nextInt();
+
+                    System.out.println();
+
                     // 2. Get account to transfer money to as toAccount
-                    // 3.    If fromAccount balance falls below $0 after deduction
+
+                    System.out.print("ENTER A/C NUMBER OF ACCOUNT TO TRANSFER MONEY TO: ");
+                    int toAccount = sc.nextInt();
+
+                    System.out.println();
+
+                    // 3. Get amount to transfer
+
+                    System.out.print("ENTER AMOUNT OF FUNDS TO TRANSFER: ");
+                    int transferVal = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.println();
+
+                    // 4.    If fromAccount balance falls below $0 after deduction
                     //          then cancel transaction
-                    // 4.    If fromAccount balance falls below $10
+                    // 5.    If fromAccount balance falls below $10
                     //          then issue warning message about low a/c balance
-                    // 5.    If toAccount balance falls above $100,000
+                    // 6.    If toAccount balance falls above $100,000
                     //          then issue warning message about federal insurance
-                    // 6.    Display the ending messages
+                    // 7.    Display the ending messages
                     //
                     // NOTE: For errors, program should terminate GRACEFULLY, for warning
-//                  //          messages, the program continues to execute
+                    //          messages, the program continues to execute
+
                     break;
 
                 default:
