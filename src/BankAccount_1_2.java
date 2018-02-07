@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +22,8 @@ public class BankAccount_1_2 {
                     "WELCOME TO INTERBANKING PTY SYSTEM\n"+
                     "========================================\n"+
                     "1. CREATE NEW BANK ACCOUNT \n"+
-                    "2. VIEW ACCOUNT BALANCE \n"+
+                    "2. VIEW ACCOUNT BALANCE \n" +
+                    "3. ACCOUNT MONEY TRANSFER"+
                     "\nPLEASE ENTER MENU OPTION NUMBER OR 0 TO EXIT: "
             );
 
@@ -40,9 +42,23 @@ public class BankAccount_1_2 {
                             "NEW BANK ACCOUNT FORM\n" +
                             "==============================\n");
 
-                    System.out.print("Enter Account number: ");
-                    int accountNumber = sc.nextInt();
-                    sc.nextLine();
+                    int accountNumber = 0;
+
+                    while (true) {
+                        try {
+                            System.out.print("Enter Account number: ");
+                            accountNumber = sc.nextInt();
+                            sc.nextLine();
+                            if(!(accountNumber>1000 && accountNumber<9999)){
+                                throw new IOException();
+                            }
+                            System.out.println();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid account number");
+                        }
+                    }
+
                     System.out.println("Your account number is "+accountNumber+"\n");
 
                     System.out.print("Enter starting A/C balance: ");
@@ -103,6 +119,21 @@ public class BankAccount_1_2 {
                     //existing BankAccount not found for input account numebr and name
                     if(!isFound) System.out.println("Invalid account number or customer name. Please try again.\n");
 
+                    break;
+
+                case '3':
+                    // 1. Get account to transfer money from as fromAccount
+                    // 2. Get account to transfer money to as toAccount
+                    // 3.    If fromAccount balance falls below $0 after deduction
+                    //          then cancel transaction
+                    // 4.    If fromAccount balance falls below $10
+                    //          then issue warning message about low a/c balance
+                    // 5.    If toAccount balance falls above $100,000
+                    //          then issue warning message about federal insurance
+                    // 6.    Display the ending messages
+                    //
+                    // NOTE: For errors, program should terminate GRACEFULLY, for warning
+//                  //          messages, the program continues to execute
                     break;
 
                 default:
