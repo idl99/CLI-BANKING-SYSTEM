@@ -67,10 +67,10 @@ public class BankAccount_1_2 {
 
         listOfBankAcc = new ArrayList<BankAccount>(){};
         listOfBankAcc.add(new BankAccount(
-                1000, 85000, "Ihan Lelwala", new char[]{'i','h','a','n'}
+                9998, 85000, "Ihan Lelwala", new char[]{'i','h','a','n'}
         ));
         listOfBankAcc.add(new BankAccount(
-                1001, 25000, "John Doe", new char[]{'j','o','h','n'}
+                9999, 25000, "John Doe", new char[]{'j','o','h','n'}
         ));
 
         while (true) {
@@ -83,7 +83,8 @@ public class BankAccount_1_2 {
                     "========================================\n"+
                     "1. CREATE NEW BANK ACCOUNT \n"+
                     "2. VIEW ACCOUNT BALANCE \n" +
-                    "3. ACCOUNT MONEY TRANSFER \n"+
+                    "3. ACCOUNT MONEY TRANSFER \n" +
+                    "4. DISPLAY ALL ACCOUNTS \n"+
                     "\nPLEASE ENTER MENU OPTION NUMBER OR 0 TO EXIT: "
             );
 
@@ -123,10 +124,17 @@ public class BankAccount_1_2 {
 
                     System.out.print("Enter starting A/C balance: ");
                     double accountBalance = sc.nextDouble();
-                    sc.nextLine();
-                    System.out.print("Your starting account balance is $");
-                    System.out.printf("%,.2f",accountBalance);
-                    System.out.println("\n");
+                    if(accountBalance<0) {
+                        System.out.println("Invalid Starting A/C balance. Balance should be positive\n");
+                        sc.nextLine();
+                        break;
+                    }
+                    else{
+                        sc.nextLine();
+                        System.out.print("Your starting account balance is $");
+                        System.out.printf("%,.2f",accountBalance);
+                        System.out.println("\n");
+                    }
 
                     System.out.print("Enter Customer name: ");
                     String customerName = sc.nextLine();
@@ -211,6 +219,20 @@ public class BankAccount_1_2 {
                         System.exit(0);
                     } finally{
                         System.out.println();
+                    }
+
+                    break;
+
+                case '4':
+
+                    for(BankAccount acc: listOfBankAcc){
+                        System.out.printf(
+                                "Account Number: %s \n" +
+                                "Account Balance: %,.2f \n" +
+                                "Customer Name: %s \n" +
+                                "Customer Password: %s \n\n",
+                                acc.accountNumber, acc.accountBalance, acc.customerName,String.valueOf(acc.password)
+                        );
                     }
 
                     break;
