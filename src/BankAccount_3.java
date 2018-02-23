@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,59 +7,6 @@ public class BankAccount_3 {
     // Tester class for Bank Account objects
 
     static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
-
-    public static void processMoneyTransfer (int paramFrom, int paramToAcc, double transactVal)
-            throws Exception{
-
-        if(paramFrom == paramToAcc){
-            throw new Exception("Both account numbers are same");
-        }
-
-        BankAccount fromBankAcc = null;
-        BankAccount toBankAcc = null;
-
-        for(BankAccount acc : listOfBankAcc){
-            if(acc.accountNumber == paramFrom) fromBankAcc = acc;
-            else if(acc.accountNumber == paramToAcc) toBankAcc = acc;
-        }
-
-        if(fromBankAcc == null) {
-            throw new Exception("THE ACCOUNT NUMBER FROM WHICH YOU ARE " +
-                    "TRANSFERRING FUNDS DOESN'T EXIST");
-        } else if(toBankAcc == null) {
-            throw new Exception("THE ACCOUNT NUMBER TO YOU ARE " +
-                    "TRANSFERRING FUNDS DOESN'T EXIST");
-        }
-
-        // 4.    If fromAccount balance falls below $0 after deduction
-        //          then cancel transaction
-        if(fromBankAcc.accountBalance - transactVal < 0) throw new Exception("Insufficient funds in account. " +
-                "Account Balance is "+String.valueOf(fromBankAcc.accountBalance));
-
-        // 5.    If fromAccount balance falls below $10
-        //          then issue warning message about low a/c balance
-        if(fromBankAcc.accountBalance - transactVal <= 10) System.out.println("WARNING: The balance of the account " +
-                "from which you are transferring funds to has dropped below $10.\n");
-
-        // 6.    If toAccount balance falls above $100,000
-        //          then issue warning message about federal insurance
-        if (toBankAcc.accountBalance + transactVal > 100000) System.out.println("WARNING: The balance of the account " +
-                "to which you are transferring funds to has gone beyond the maximum federally insured value.\n");
-
-        // 7.    Display the ending messages
-        //
-        // NOTE: For errors, program should terminate GRACEFULLY, for warning
-        //          messages, the program continues to execute
-
-        fromBankAcc.accountBalance -= transactVal;
-        toBankAcc.accountBalance += transactVal;
-
-        System.out.printf("AMOUNT OF %.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
-                "TRANSFERRER'S NEW ACCOUNT BALANCE IS %.2f\n\n" +
-                "RECIPIENT'S NEW ACCOUNT BALANCE IS %.2f",
-                transactVal,paramFrom,paramToAcc,fromBankAcc.accountBalance, toBankAcc.accountBalance);
-
-    }
 
     public static void main(String[] args){
 
@@ -287,6 +233,59 @@ public class BankAccount_3 {
                     break;
             }
         }
+
+    }
+
+    public static void processMoneyTransfer (int paramFrom, int paramToAcc, double transactVal)
+            throws Exception{
+
+        if(paramFrom == paramToAcc){
+            throw new Exception("Both account numbers are same");
+        }
+
+        BankAccount fromBankAcc = null;
+        BankAccount toBankAcc = null;
+
+        for(BankAccount acc : listOfBankAcc){
+            if(acc.accountNumber == paramFrom) fromBankAcc = acc;
+            else if(acc.accountNumber == paramToAcc) toBankAcc = acc;
+        }
+
+        if(fromBankAcc == null) {
+            throw new Exception("THE ACCOUNT NUMBER FROM WHICH YOU ARE " +
+                    "TRANSFERRING FUNDS DOESN'T EXIST");
+        } else if(toBankAcc == null) {
+            throw new Exception("THE ACCOUNT NUMBER TO YOU ARE " +
+                    "TRANSFERRING FUNDS DOESN'T EXIST");
+        }
+
+        // 4.    If fromAccount balance falls below $0 after deduction
+        //          then cancel transaction
+        if(fromBankAcc.accountBalance - transactVal < 0) throw new Exception("Insufficient funds in account. " +
+                "Account Balance is "+String.valueOf(fromBankAcc.accountBalance));
+
+        // 5.    If fromAccount balance falls below $10
+        //          then issue warning message about low a/c balance
+        if(fromBankAcc.accountBalance - transactVal <= 10) System.out.println("WARNING: The balance of the account " +
+                "from which you are transferring funds to has dropped below $10.\n");
+
+        // 6.    If toAccount balance falls above $100,000
+        //          then issue warning message about federal insurance
+        if (toBankAcc.accountBalance + transactVal > 100000) System.out.println("WARNING: The balance of the account " +
+                "to which you are transferring funds to has gone beyond the maximum federally insured value.\n");
+
+        // 7.    Display the ending messages
+        //
+        // NOTE: For errors, program should terminate GRACEFULLY, for warning
+        //          messages, the program continues to execute
+
+        fromBankAcc.accountBalance -= transactVal;
+        toBankAcc.accountBalance += transactVal;
+
+        System.out.printf("AMOUNT OF %.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
+                        "TRANSFERRER'S NEW ACCOUNT BALANCE IS %.2f\n\n" +
+                        "RECIPIENT'S NEW ACCOUNT BALANCE IS %.2f",
+                transactVal,paramFrom,paramToAcc,fromBankAcc.accountBalance, toBankAcc.accountBalance);
 
     }
 
