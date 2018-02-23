@@ -329,7 +329,7 @@ public class BankAccount_3 {
 
         int year = 0;
 
-        double newBal = account.accountBalance;
+        double balance = account.accountBalance;
 
         for(int i=0; i<months; i++){
 
@@ -342,13 +342,16 @@ public class BankAccount_3 {
                         "\n",year);
             }
 
-            double principal = newBal+account.autoDeposit-account.autoWithdraw;
+            System.out.printf("----- Year %d Month %d-----\n",year,(i%12)+1);
+            System.out.printf("Month Starting Balance: %,.2f \n",balance);
+
+            double principal = balance+account.autoDeposit-account.autoWithdraw;
 
             double interest = principal * ((account.interestRate/12)/100) ;
 
-            newBal = principal + interest;
+            balance = principal + interest;
 
-            System.out.printf("Month %d : %,.2f \n",(i%12)+1,newBal);
+            System.out.printf("Month Ending Balance: %,.2f \n\n",balance);
 
         }
 
