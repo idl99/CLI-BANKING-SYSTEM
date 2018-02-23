@@ -1,4 +1,6 @@
-public class BankAccount {
+import java.io.Serializable;
+
+public class BankAccount implements Serializable {
 
     public int accountNumber;
     public double accountBalance;

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -140,6 +141,8 @@ public class BankAccount_3 {
                                     password, interestRate, autoDeposit, autoWithdraw);
 
                             listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
+
+                            writeToFile();
 
                             System.out.printf("\nBANK ACCOUNT NUMBER %d SUCCESSFULLY CREATED.\n\n",accountNumber);
 
@@ -356,6 +359,28 @@ public class BankAccount_3 {
         }
 
         System.out.println();
+
+    }
+
+    public static void writeToFile(){
+
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(new File("Accounts.txt"));
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(listOfBankAcc);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                oos.close();
+                fos.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
     }
 
