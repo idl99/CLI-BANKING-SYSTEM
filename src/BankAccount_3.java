@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class BankAccount_1_2 {
+public class BankAccount_3 {
 
     // Tester class for Bank Account objects
 
