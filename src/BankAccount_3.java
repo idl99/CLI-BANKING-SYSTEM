@@ -13,9 +13,11 @@ public class BankAccount_3 {
         Scanner sc = new Scanner(System.in);
 
         listOfBankAcc = new ArrayList<BankAccount>(){};
+
+        // Test Objects
         listOfBankAcc.add(new BankAccount(
-                9998, 85000, "Ihan Lelwala", new char[]{'i','h','a','n'},
-                10,10000,4000
+                9998, 100000, "Ihan Lelwala", new char[]{'i','h','a','n'},
+                10,20000,10000
         ));
         listOfBankAcc.add(new BankAccount(
                 9999, 25000, "John Doe", new char[]{'j','o','h','n'},
@@ -33,7 +35,8 @@ public class BankAccount_3 {
                     "1. CREATE NEW BANK ACCOUNT \n"+
                     "2. VIEW ACCOUNT BALANCE \n" +
                     "3. ACCOUNT MONEY TRANSFER \n" +
-                    "4. DISPLAY ALL ACCOUNTS \n"+
+                    "4. DISPLAY ALL ACCOUNTS \n" +
+                    "5. SHOW BANK A/C BALANCE FORECAST \n" +
                     "\nPLEASE ENTER MENU OPTION NUMBER OR 0 TO EXIT: "
             );
 
@@ -66,7 +69,7 @@ public class BankAccount_3 {
                                 throw new Exception("\nInvalid account number. Account number should be between" +
                                         " 1000 and 10000\n");
                             }
-                            System.out.println("Your account number is "+accountNumber+"\n");
+                            System.out.println("The account number is "+accountNumber+"\n");
 
                             // =============================================
                             // Getting input for starting account balance
@@ -80,7 +83,7 @@ public class BankAccount_3 {
                             }
                             else {
                                 sc.nextLine();
-                                System.out.print("Your starting account balance is $");
+                                System.out.print("The starting account balance is $");
                                 System.out.printf("%,.2f \n\n", accountBalance);
                             }
 
@@ -90,7 +93,7 @@ public class BankAccount_3 {
 
                             System.out.print("Enter Customer name: ");
                             String customerName = sc.nextLine();
-                            System.out.println("Your name is "+customerName+"\n");
+                            System.out.println("The customer's name is "+customerName+"\n");
 
                             // =============================================
                             // Getting input for account password
@@ -115,7 +118,7 @@ public class BankAccount_3 {
                             if(interestRate < 0.01 || interestRate > 15)
                                 throw new Exception("Invalid Account interest rate. Rate should be between 0.01%" +
                                         " and 15%");
-                            else System.out.printf("Your account interest rate is %.2f %% \n\n",interestRate);
+                            else System.out.printf("The account interest rate is %,.2f %% \n\n",interestRate);
 
                             // =============================================
                             // Getting input for aut deposit amount
@@ -123,7 +126,7 @@ public class BankAccount_3 {
 
                             System.out.print("Enter monthly auto deposit amount: ");
                             double autoDeposit = sc.nextDouble();
-                            System.out.printf("Your monthly auto deposit amount is %.2f \n\n",autoDeposit);
+                            System.out.printf("The monthly auto deposit amount is %,.2f \n\n",autoDeposit);
 
                             // =============================================
                             // Getting input for auto withdraw amount
@@ -131,7 +134,7 @@ public class BankAccount_3 {
 
                             System.out.print("Enter monthly withdraw amount: ");
                             double autoWithdraw = sc.nextDouble();
-                            System.out.printf("Your monthly auto withdraw amount is %.2f \n",autoWithdraw);
+                            System.out.printf("The monthly auto withdraw amount is %,.2f \n",autoWithdraw);
 
                             BankAccount account = new BankAccount(accountNumber, accountBalance, customerName,
                                     password, interestRate, autoDeposit, autoWithdraw);
@@ -153,10 +156,10 @@ public class BankAccount_3 {
 
                 case '2':
 
-                    System.out.print("Enter your account number: ");
+                    System.out.print("Enter account number: ");
                     int input_accNo = sc.nextInt();
                     sc.nextLine();
-                    System.out.print("Enter your full name(in upper Camelcase): ");
+                    System.out.print("Enter customer full name(in upper Camelcase): ");
                     String input_customerName = sc.nextLine();
 
                     System.out.println();
@@ -228,6 +231,40 @@ public class BankAccount_3 {
 
                     break;
 
+                case '5':
+
+                    BankAccount account = null;
+
+                    try {
+
+                        System.out.print("Enter bank account number: ");
+                        int accountNumber;
+                        accountNumber = sc.nextInt();
+                        sc.nextLine();
+
+                        boolean accIsExist = false;
+                        for(BankAccount searchAcc: listOfBankAcc){
+                            if (searchAcc.accountNumber == accountNumber) {
+                                account = searchAcc;
+                                accIsExist = true;
+                            }
+                        }
+
+                        if(!accIsExist) {
+                            throw new Exception("THE ACCOUNT NUMBER YOU ENTERED DOESN'T EXIST");
+                        } else {
+                            System.out.print("Enter the number of months for forecast: ");
+                            int term = sc.nextInt();
+                            sc.nextLine();
+                            System.out.println();
+                            showAccBalForecast(account, term);
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                    break;
                 default:
                     System.out.println("Invalid Input. Please re-enter menu option below.");
                     break;
@@ -282,10 +319,43 @@ public class BankAccount_3 {
         fromBankAcc.accountBalance -= transactVal;
         toBankAcc.accountBalance += transactVal;
 
-        System.out.printf("AMOUNT OF %.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
-                        "TRANSFERRER'S NEW ACCOUNT BALANCE IS %.2f\n\n" +
-                        "RECIPIENT'S NEW ACCOUNT BALANCE IS %.2f",
+        System.out.printf("AMOUNT OF %,.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
+                        "TRANSFERRER'S NEW ACCOUNT BALANCE IS %,.2f\n\n" +
+                        "RECIPIENT'S NEW ACCOUNT BALANCE IS %,.2f",
                 transactVal,paramFrom,paramToAcc,fromBankAcc.accountBalance, toBankAcc.accountBalance);
+
+    }
+
+    public static void showAccBalForecast(BankAccount account, int months){
+
+        System.out.println("THE BANK ACCOUNT BALANCE FORECAST IS AS FOLLOWS: \n");
+
+        int year = 0;
+
+        double newBal = account.accountBalance;
+
+        for(int i=0; i<months; i++){
+
+            if(i%12==0){
+                year++;
+                System.out.printf("" +
+                        "=========================\n" +
+                        "YEAR NUMBER %d \n" +
+                        "=========================\n" +
+                        "\n",year);
+            }
+
+            double principal = newBal+account.autoDeposit-account.autoWithdraw;
+
+            double interest = principal * ((account.interestRate/12)/100) ;
+
+            newBal = principal + interest;
+
+            System.out.printf("Month %d : %,.2f \n",(i%12)+1,newBal);
+
+        }
+
+        System.out.println();
 
     }
 
