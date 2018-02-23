@@ -19,16 +19,6 @@ public class BankAccount_3 {
             listOfBankAcc = new ArrayList<>();
         }
 
-        // Test Objects
-        listOfBankAcc.add(new BankAccount(
-                9998, 100000, "Ihan Lelwala", new char[]{'i','h','a','n'},
-                10,20000,10000
-        ));
-        listOfBankAcc.add(new BankAccount(
-                9999, 25000, "John Doe", new char[]{'j','o','h','n'},
-                15,5000,1000
-        ));
-
         while (true) {
 
             char opt;
@@ -395,7 +385,7 @@ public class BankAccount_3 {
         ArrayList<BankAccount> listOfBankAcc = null;
 
         try {
-            fis = new FileInputStream(new File("Students.txt"));
+            fis = new FileInputStream(new File("Accounts.txt"));
             ois = new ObjectInputStream(fis);
             listOfBankAcc = (ArrayList<BankAccount>) ois.readObject();
         } catch (FileNotFoundException e) {
