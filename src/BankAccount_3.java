@@ -13,7 +13,11 @@ public class BankAccount_3 {
 
         Scanner sc = new Scanner(System.in);
 
-        listOfBankAcc = new ArrayList<BankAccount>(){};
+        if(new File("Accounts.txt").exists()){
+            listOfBankAcc = readFromFile();
+        } else {
+            listOfBankAcc = new ArrayList<>();
+        }
 
         // Test Objects
         listOfBankAcc.add(new BankAccount(
@@ -381,6 +385,37 @@ public class BankAccount_3 {
                 System.out.println(e.getMessage());
             }
         }
+
+    }
+
+    public static ArrayList<BankAccount> readFromFile(){
+
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        ArrayList<BankAccount> listOfBankAcc = null;
+
+        try {
+            fis = new FileInputStream(new File("Students.txt"));
+            ois = new ObjectInputStream(fis);
+            listOfBankAcc = (ArrayList<BankAccount>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ois.close();
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return listOfBankAcc;
 
     }
 
