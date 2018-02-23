@@ -68,10 +68,12 @@ public class BankAccount_3 {
 
         listOfBankAcc = new ArrayList<BankAccount>(){};
         listOfBankAcc.add(new BankAccount(
-                9998, 85000, "Ihan Lelwala", new char[]{'i','h','a','n'}
+                9998, 85000, "Ihan Lelwala", new char[]{'i','h','a','n'},
+                10,10000,4000
         ));
         listOfBankAcc.add(new BankAccount(
-                9999, 25000, "John Doe", new char[]{'j','o','h','n'}
+                9999, 25000, "John Doe", new char[]{'j','o','h','n'},
+                15,5000,1000
         ));
 
         while (true) {
@@ -149,9 +151,22 @@ public class BankAccount_3 {
                         System.out.print(password[i]);
                     }
 
-                    BankAccount account = new BankAccount(
-                            accountNumber, accountBalance,
-                            customerName, password);
+                    System.out.println("\n");
+
+                    System.out.println("Enter Account interest rate: ");
+                    double interestRate = sc.nextDouble();
+                    System.out.printf("Your interest rate is %.2f %% \n\n",interestRate);
+
+                    System.out.println("Enter monthly auto deposit amount: ");
+                    double autoDeposit = sc.nextDouble();
+                    System.out.printf("Your monthly auto deposit amount is %.2f \n\n" ,autoDeposit);
+
+                    System.out.println("Enter monthly withdraw amount: ");
+                    double autoWithdraw = sc.nextDouble();
+                    System.out.printf("Your monthly auto withdraw amount is %.2f \n",autoWithdraw);
+
+                    BankAccount account = new BankAccount(accountNumber, accountBalance, customerName,
+                            password, interestRate, autoDeposit, autoWithdraw);
 
                     listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
 
