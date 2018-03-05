@@ -3,15 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class BankAccount_3 {
+public class BankAccount_4 {
 
     // Tester class for Bank Account objects
+
+    static Scanner sc = new Scanner(System.in);
 
     static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
 
     public static void main(String[] args){
-
-        Scanner sc = new Scanner(System.in);
 
         if(new File("Accounts.txt").exists()){
             listOfBankAcc = readFromFile();
@@ -48,97 +48,13 @@ public class BankAccount_3 {
                     while (true) {
                         try {
 
-                            System.out.println(
-                                    "==============================\n" +
-                                    "NEW BANK ACCOUNT FORM\n" +
-                                    "==============================\n");
-
-                            // =============================================
-                            // Getting input for account number
-                            // =============================================
-
-                            System.out.print("Enter Account number: ");
-                            int accountNumber = sc.nextInt();
-                            sc.nextLine();
-                            if(!(accountNumber>1000 && accountNumber<9999)){
-                                throw new Exception("\nInvalid account number. Account number should be between" +
-                                        " 1000 and 10000\n");
-                            }
-                            System.out.println("The account number is "+accountNumber+"\n");
-
-                            // =============================================
-                            // Getting input for starting account balance
-                            // =============================================
-
-                            System.out.print("Enter starting A/C balance: ");
-                            double accountBalance = sc.nextDouble();
-                            if(accountBalance<0) {
-                                sc.nextLine();
-                                throw new Exception("\nInvalid Starting A/C balance. Balance should be positive\n");
-                            }
-                            else {
-                                sc.nextLine();
-                                System.out.print("The starting account balance is $");
-                                System.out.printf("%,.2f \n\n", accountBalance);
-                            }
-
-                            // =============================================
-                            // Getting input for customer name
-                            // =============================================
-
-                            System.out.print("Enter Customer name: ");
-                            String customerName = sc.nextLine();
-                            System.out.println("The customer's name is "+customerName+"\n");
-
-                            // =============================================
-                            // Getting input for account password
-                            // =============================================
-
-                            System.out.print("Enter Account password: ");
-                            char[] password = sc.next().toCharArray();
-                            System.out.print("Your password is ");
-
-                            for (int i=0; i<password.length; i++){
-                                System.out.print(password[i]);
-                            }
-
-                            System.out.println("\n");
-
-                            // =============================================
-                            // Getting input for account password
-                            // =============================================
-
-                            System.out.print("Enter Account interest rate: ");
-                            double interestRate = sc.nextDouble();
-                            if(interestRate < 0.01 || interestRate > 15)
-                                throw new Exception("Invalid Account interest rate. Rate should be between 0.01%" +
-                                        " and 15%");
-                            else System.out.printf("The account interest rate is %,.2f %% \n\n",interestRate);
-
-                            // =============================================
-                            // Getting input for aut deposit amount
-                            // =============================================
-
-                            System.out.print("Enter monthly auto deposit amount: ");
-                            double autoDeposit = sc.nextDouble();
-                            System.out.printf("The monthly auto deposit amount is %,.2f \n\n",autoDeposit);
-
-                            // =============================================
-                            // Getting input for auto withdraw amount
-                            // =============================================
-
-                            System.out.print("Enter monthly withdraw amount: ");
-                            double autoWithdraw = sc.nextDouble();
-                            System.out.printf("The monthly auto withdraw amount is %,.2f \n",autoWithdraw);
-
-                            BankAccount account = new BankAccount(accountNumber, accountBalance, customerName,
-                                    password, interestRate, autoDeposit, autoWithdraw);
+                            BankAccount account = enterAccountData();
 
                             listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
 
                             writeToFile();
 
-                            System.out.printf("\nBANK ACCOUNT NUMBER %d SUCCESSFULLY CREATED.\n\n",accountNumber);
+                            System.out.printf("\nBANK ACCOUNT NUMBER %d SUCCESSFULLY CREATED.\n\n",account.accountNumber);
 
                             sc.nextLine();
 
@@ -255,6 +171,7 @@ public class BankAccount_3 {
                             sc.nextLine();
                             System.out.println();
                             showAccBalForecast(account, term);
+                            computeInterest(account);
                         }
 
                     } catch (Exception e) {
@@ -362,6 +279,7 @@ public class BankAccount_3 {
     public static void writeToFile(){
 
         FileOutputStream fos = null;
+
         ObjectOutputStream oos = null;
 
         try {
@@ -411,5 +329,137 @@ public class BankAccount_3 {
         return listOfBankAcc;
 
     }
+
+    public static BankAccount enterAccountData() throws Exception{
+        System.out.println(
+                "==============================\n" +
+                        "NEW BANK ACCOUNT FORM\n" +
+                        "==============================\n");
+
+        // =============================================
+        // Getting input for account number
+        // =============================================
+
+        System.out.print("Enter Account number: ");
+        int accountNumber = sc.nextInt();
+        sc.nextLine();
+        if(!(accountNumber>1000 && accountNumber<9999)){
+            throw new Exception("\nInvalid account number. Account number should be between" +
+                    " 1000 and 10000\n");
+        }
+        System.out.println("The account number is "+accountNumber+"\n");
+
+        // =============================================
+        // Getting input for starting account balance
+        // =============================================
+
+        System.out.print("Enter starting A/C balance: ");
+        double accountBalance = sc.nextDouble();
+        if(accountBalance<0) {
+            sc.nextLine();
+            throw new Exception("\nInvalid Starting A/C balance. Balance should be positive\n");
+        }
+        else {
+            sc.nextLine();
+            System.out.print("The starting account balance is $");
+            System.out.printf("%,.2f \n\n", accountBalance);
+        }
+
+        // =============================================
+        // Getting input for customer name
+        // =============================================
+
+        System.out.print("Enter Customer name: ");
+        String customerName = sc.nextLine();
+        System.out.println("The customer's name is "+customerName+"\n");
+
+        // =============================================
+        // Getting input for account password
+        // =============================================
+
+        System.out.print("Enter Account password: ");
+        char[] password = sc.next().toCharArray();
+        System.out.print("Your password is ");
+
+        for (int i=0; i<password.length; i++){
+            System.out.print(password[i]);
+        }
+
+        System.out.println("\n");
+
+        // =============================================
+        // Getting input for account password
+        // =============================================
+
+        System.out.print("Enter Account interest rate: ");
+        double interestRate = sc.nextDouble();
+        if(interestRate < 0.01 || interestRate > 15)
+            throw new Exception("Invalid Account interest rate. Rate should be between 0.01%" +
+                    " and 15%");
+        else System.out.printf("The account interest rate is %,.2f %% \n\n",interestRate);
+
+        // =============================================
+        // Getting input for aut deposit amount
+        // =============================================
+
+        System.out.print("Enter monthly auto deposit amount: ");
+        double autoDeposit = sc.nextDouble();
+        System.out.printf("The monthly auto deposit amount is %,.2f \n\n",autoDeposit);
+
+        // =============================================
+        // Getting input for auto withdraw amount
+        // =============================================
+
+        System.out.print("Enter monthly withdraw amount: ");
+        double autoWithdraw = sc.nextDouble();
+        System.out.printf("The monthly auto withdraw amount is %,.2f \n",autoWithdraw);
+
+        return new BankAccount(accountNumber, accountBalance, customerName,
+                password, interestRate, autoDeposit, autoWithdraw);
+    }
+
+    public static void computeInterest(BankAccount account){
+
+        System.out.print("Enter the number of months for you wish to compute interest: ");
+
+        int months = sc.nextInt();
+
+        sc.nextLine();
+
+        System.out.println();
+
+        double balance = account.accountBalance;
+
+        for(int i=0; i<months; i++){
+
+            double principal = balance+account.autoDeposit-account.autoWithdraw;
+
+            double interest = principal * ((account.interestRate/12)/100) ;
+
+            balance = principal + interest;
+
+        }
+
+        System.out.printf("Account balance at the end of the term is %,.2f\n",balance);
+
+    }
+
+    public static void displayAccount(BankAccount account){
+
+        System.out.println("ACCOUNT NUMBER: "+account.accountNumber);
+
+        System.out.println("ACCOUNT BALANCE: "+account.accountBalance);
+
+        System.out.println("CUSTOMER NAME: "+account.customerName);
+
+        System.out.println("INTEREST RATE: "+account.interestRate);
+
+        System.out.println("MONTHLY AUTO DEPOSIT AMOUNT: "+account.autoDeposit);
+
+        System.out.println("MONTHLY AUTO WITHDRAW AMOUNT: "+account.autoWithdraw);
+
+    }
+
+
 
 }
