@@ -7,6 +7,10 @@ public class BankAccount_4 {
 
     // Tester class for Bank Account objects
 
+    // TODO add displayAccount()
+    // TODO call display method to display account details upon completion
+    // TODO add dataPersistency() method
+
     static Scanner sc = new Scanner(System.in);
 
     static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
@@ -46,9 +50,14 @@ public class BankAccount_4 {
                 case '1':
 
                     while (true) {
+
+                        BankAccount account = null;
+
                         try {
 
-                            BankAccount account = enterAccountData();
+                            account = enterAccountData();
+
+                            if(account==null) break;
 
                             listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
 
@@ -56,13 +65,18 @@ public class BankAccount_4 {
 
                             System.out.printf("\nBANK ACCOUNT NUMBER %d SUCCESSFULLY CREATED.\n\n",account.accountNumber);
 
-                            sc.nextLine();
+                            computeInterest(account);
 
-                            break;
+                            System.out.println();
 
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
+
+                        if(account == null){
+                            break;
+                        }
+
                     }
 
                     break;
@@ -175,7 +189,7 @@ public class BankAccount_4 {
                         }
 
                     } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                        e.printStackTrace();
                     }
 
                     break;
@@ -343,10 +357,13 @@ public class BankAccount_4 {
         System.out.print("Enter Account number: ");
         int accountNumber = sc.nextInt();
         sc.nextLine();
-        if(!(accountNumber>1000 && accountNumber<9999)){
+        if(accountNumber == 0){
+            return null;
+        } else if(!(accountNumber>1000 && accountNumber<9999)){
             throw new Exception("\nInvalid account number. Account number should be between" +
                     " 1000 and 10000\n");
         }
+
         System.out.println("The account number is "+accountNumber+"\n");
 
         // =============================================
