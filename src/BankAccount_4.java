@@ -428,13 +428,15 @@ public class BankAccount_4 {
 
         double balance = account.accountBalance;
 
-        for(int i=0; i<months; i++){
+        for(int i=1; i<=months; i++){
 
             double principal = balance+account.autoDeposit-account.autoWithdraw;
 
             double interest = principal * ((account.interestRate/12)/100) ;
 
             balance = principal + interest;
+
+            if(i%12==0) System.out.printf("Account balance at the end of year %d is %,.2f\n",(i/12),balance);
 
         }
 
