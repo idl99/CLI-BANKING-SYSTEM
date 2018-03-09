@@ -446,17 +446,17 @@ public class BankAccount_4 {
 
     public static void displayAccount(BankAccount account){
 
-        System.out.println("ACCOUNT NUMBER: "+account.accountNumber);
+        System.out.printf("ACCOUNT NUMBER: %d \n",account.accountNumber);
 
-        System.out.println("ACCOUNT BALANCE: "+account.accountBalance);
+        System.out.printf("ACCOUNT BALANCE: %,.2f \n",account.accountBalance);
 
-        System.out.println("CUSTOMER NAME: "+account.customerName);
+        System.out.printf("CUSTOMER NAME: %s \n",account.customerName);
 
-        System.out.println("INTEREST RATE: "+account.interestRate);
+        System.out.printf("INTEREST RATE: %.2f %% \n",account.interestRate);
 
-        System.out.println("MONTHLY AUTO DEPOSIT AMOUNT: "+account.autoDeposit);
+        System.out.printf("MONTHLY AUTO DEPOSIT AMOUNT: %,.2f \n",account.autoDeposit);
 
-        System.out.println("MONTHLY AUTO WITHDRAW AMOUNT: "+account.autoWithdraw);
+        System.out.printf("MONTHLY AUTO WITHDRAW AMOUNT: %,.2f \n",account.autoWithdraw);
 
     }
 
