@@ -7,10 +7,6 @@ public class BankAccount_4 {
 
     // Tester class for Bank Account objects
 
-    // TODO add displayAccount()
-    // TODO call display method to display account details upon completion
-    // TODO add dataPersistency() method
-
     static Scanner sc = new Scanner(System.in);
 
     static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
@@ -18,7 +14,7 @@ public class BankAccount_4 {
     public static void main(String[] args){
 
         if(new File("Accounts.txt").exists()){
-            listOfBankAcc = readFromFile();
+            listOfBankAcc = dataPersistency();
         } else {
             listOfBankAcc = new ArrayList<>();
         }
@@ -61,9 +57,11 @@ public class BankAccount_4 {
 
                             listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
 
-                            writeToFile();
+                            dataPersistency(listOfBankAcc); // Writing to file
 
                             System.out.printf("\nBANK ACCOUNT NUMBER %d SUCCESSFULLY CREATED.\n\n",account.accountNumber);
+
+                            displayAccount(account);
 
                             computeInterest(account);
 
@@ -290,31 +288,8 @@ public class BankAccount_4 {
 
     }
 
-    public static void writeToFile(){
-
-        FileOutputStream fos = null;
-
-        ObjectOutputStream oos = null;
-
-        try {
-            fos = new FileOutputStream(new File("Accounts.txt"));
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(listOfBankAcc);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                oos.close();
-                fos.close();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-    }
-
-    public static ArrayList<BankAccount> readFromFile(){
-
+    public static ArrayList<BankAccount> dataPersistency(){
+        // METHOD FOR READING FROM FILE
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         ArrayList<BankAccount> listOfBankAcc = null;
@@ -342,6 +317,28 @@ public class BankAccount_4 {
 
         return listOfBankAcc;
 
+    }
+
+    public static void dataPersistency(List<BankAccount> listOfAccounts){
+        // METHOD FOR WRITING TO FILE
+        FileOutputStream fos = null;
+
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(new File("Accounts.txt"));
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(listOfAccounts);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                oos.close();
+                fos.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static BankAccount enterAccountData() throws Exception{
