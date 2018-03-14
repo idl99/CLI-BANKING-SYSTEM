@@ -3,21 +3,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class BankAccount_4 {
+public class BankAccount_5 {
 
     // Tester class for Bank Account objects
 
     static Scanner sc = new Scanner(System.in);
 
-    static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
+//    static List<BankAccount> listOfBankAcc; // Arraylist to store BankAccount objects
+
+    static BankAccount[] listOfBankAcc = new BankAccount[10];
+
+    static int noOfBankAcc = 0;
 
     public static void main(String[] args){
 
-        if(new File("Accounts.txt").exists()){
-            listOfBankAcc = dataPersistency();
-        } else {
-            listOfBankAcc = new ArrayList<>();
-        }
+//        if(new File("Accounts.txt").exists()){
+//            listOfBankAcc = dataPersistency();
+//        } else {
+//            listOfBankAcc = new ArrayList<>();
+//        }
 
         while (true) {
 
@@ -45,36 +49,38 @@ public class BankAccount_4 {
 
                 case '1':
 
-                    while (true) {
-
+                    {
                         BankAccount account = null;
 
                         try {
 
-                            account = enterAccountData();
+                            for (int i = noOfBankAcc; i <10; i++) {
 
-                            if(account==null) break;
+                                account = enterAccountData();
 
-                            listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
+                                if (account == null) break;
 
-                            dataPersistency(listOfBankAcc); // Writing to file
+                                listOfBankAcc[i] = account;
+                                noOfBankAcc++;
+                                System.out.printf("\nBANK ACCOUNT NUMBER %d SUCCESSFULLY CREATED.\n\n", account.accountNumber);
+                                displayAccount(account);
+    //
+                                //  listOfBankAcc.add(account); // Adding newly created BankAccount to list of existing Bank Accounts
+    //                            dataPersistency(listOfBankAcc); // Writing to file
+                            }
 
-                            System.out.printf("\nBANK ACCOUNT NUMBER %d SUCCESSFULLY CREATED.\n\n",account.accountNumber);
-
-                            displayAccount(account);
+                            System.out.print("\nEnter number of years for which you wish to compute interest: ");
+                            int term = sc.nextInt();
+                            sc.nextLine();
 
                             System.out.println();
 
-                            computeInterest(account);
-
-                            System.out.println();
+                            for (BankAccount forAccount : listOfBankAcc) {
+                                computeInterest(forAccount, term);
+                            }
 
                         } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-
-                        if(account == null){
-                            break;
+                            e.getMessage();
                         }
 
                     }
@@ -185,7 +191,6 @@ public class BankAccount_4 {
                             sc.nextLine();
                             System.out.println();
                             showAccBalForecast(account, term);
-                            computeInterest(account);
                         }
 
                     } catch (Exception e) {
@@ -193,9 +198,9 @@ public class BankAccount_4 {
                     }
 
                     break;
+
                 default:
                     System.out.println("Invalid Input. Please re-enter menu option below.");
-                    break;
             }
         }
 
@@ -370,8 +375,10 @@ public class BankAccount_4 {
         System.out.print("Enter starting A/C balance: ");
         double accountBalance = sc.nextDouble();
         sc.nextLine();
-        if(accountBalance<0) {
+        if(accountBalance<=0) {
             throw new Exception("\nInvalid Starting A/C balance. Balance should be positive\n");
+        } else if(accountBalance>100000){
+            throw new Exception("\nAccount balance cannot be greater than $100,000 USD");
         }
 
         // =============================================
@@ -394,9 +401,12 @@ public class BankAccount_4 {
 
         System.out.print("Enter Account interest rate: ");
         double interestRate = sc.nextDouble();
-        if(interestRate < 0.01 || interestRate > 15)
+
+        if(interestRate < 0.01 || interestRate > 15) {
+            sc.nextLine();
             throw new Exception("Invalid Account interest rate. Rate should be between 0.01%" +
                     " and 15%");
+        }
 
         // =============================================
         // Getting input for aut deposit amount
@@ -411,22 +421,19 @@ public class BankAccount_4 {
 
         System.out.print("Enter monthly withdraw amount: ");
         double autoWithdraw = sc.nextDouble();
+        sc.nextLine();
 
         return new BankAccount(accountNumber, accountBalance, customerName,
                 password, interestRate, autoDeposit, autoWithdraw);
     }
 
-    public static void computeInterest(BankAccount account){
+    public static void computeInterest(BankAccount account, int noOfYears){
 
-        System.out.print("Enter the number of months for which you wish to compute interest: ");
-
-        int months = sc.nextInt();
-
-        sc.nextLine();
-
-        System.out.println();
+        System.out.printf("COMPUTE ACCOUNT INTEREST FOR %d\n\n",account.accountNumber);
 
         double balance = account.accountBalance;
+
+        int months = noOfYears * 12;
 
         for(int i=1; i<=months; i++){
 
@@ -441,6 +448,8 @@ public class BankAccount_4 {
         }
 
         System.out.printf("Account balance at the end of the term is %,.2f\n",balance);
+
+        System.out.println();
 
     }
 
