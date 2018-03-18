@@ -4,14 +4,12 @@ import java.util.Scanner;
 public class BankAccount {
     // Class defining Bank account object construct
 
-    private static Scanner sc = new Scanner(System.in);
-
     // Instance variables for Bank Account objects
     private int accountNumber;
     private double accountBalance;
 
     // Static variables for Bank Account objects
-    public static double interestRate = 3;
+    private static double interestRate = 3;
 
     private BankAccount(int accountNumber, double accountBalance) {
         this.accountNumber = accountNumber;
@@ -22,27 +20,17 @@ public class BankAccount {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
     public double getAccountBalance() {
         return accountBalance;
-    }
-
-    public void setAccountBalance(double accountBalance) {
-        this.accountBalance = accountBalance;
     }
 
     public static double getInterestRate() {
         return interestRate;
     }
 
-    public static void setInterestRate(double interestRate) {
-        BankAccount.interestRate = interestRate;
-    }
-
     public static BankAccount enterAccountData() throws IOException{
+
+        Scanner sc = new Scanner(System.in);
 
         int accountNumber = 0;
         System.out.print("Enter account number: ");
