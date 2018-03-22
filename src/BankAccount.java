@@ -56,22 +56,31 @@ public class BankAccount {
 
     public void computeInterest(int years){
 
-        System.out.printf("Account number: %d \n",this.accountNumber);
+        System.out.printf("<<<<<<<<<< ACCOUNT NUMBER : %d >>>>>>>>>>\n\n",this.accountNumber);
+
+        System.out.println("YEAR \t\t STARTING BALANCE \t\t ENDING BALANCE\n");
 
         double balance = this.accountBalance;
 
         for(int i=1; i<=years;i++){
+            System.out.printf("%d  \t\t\t %,.2f \t\t\t\t",i,balance);
             double interest = balance * BankAccount.interestRate/100;
             balance += interest;
-            System.out.printf("Balance at the end of year %d = %,.2f \n",i/12,balance);
+            System.out.printf(" %,.2f\n\n",balance);
         }
 
     }
 
     public void displayAccount(){
+
+        System.out.println("<<<<<<<<<< ACCOUNT DETAILS >>>>>>>>>>\n");
+
         System.out.printf("Account number: %d \n",this.accountNumber);
 
         System.out.printf("Account balance: %,.2f \n",this.accountBalance);
+
+        System.out.println();
+
     }
 
 }
