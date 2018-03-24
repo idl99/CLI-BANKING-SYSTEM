@@ -9,16 +9,16 @@ public class BankAccount_5 {
 
         BankAccount[] arrayOfBankAccounts = new BankAccount[10];
         int count = 0; // Count variable to count the number of existing
-                        // Bank Account objects in arrayOfBankAccounts
+        // Bank Account objects in arrayOfBankAccounts
 
         while (true) { // Program Main Loop
 
             System.out.println(
                     "===================================\n" +
-                    "WELCOME TO INTERBANKING PTY SYSTEM\n" +
-                    "===================================\n" +
-                    "1 - CREATE BANK ACCOUNTS\n" +
-                    "0 - EXIT\n"
+                            "WELCOME TO INTERBANKING PTY SYSTEM\n" +
+                            "===================================\n" +
+                            "1 - CREATE BANK ACCOUNTS\n" +
+                            "0 - EXIT\n"
             );
 
             System.out.print("ENTER OPTION >>> ");
@@ -51,7 +51,7 @@ public class BankAccount_5 {
                                     account.displayAccount();
                                 }
 
-                            } catch (IOException e) {
+                            } catch (IllegalBankAccountOperation e) {
                                 System.out.println(e.getMessage());
                             }
 

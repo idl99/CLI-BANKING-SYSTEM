@@ -28,29 +28,73 @@ public class BankAccount {
         return interestRate;
     }
 
-    public static BankAccount enterAccountData() throws IOException{
+    @Override
+    public boolean equals(Object obj) {
+        if(super.equals(obj)){
+            return true;
+        } else return this.accountNumber == ((BankAccount) obj).accountNumber;
+    }
+
+    private static void validateAccountNumber(int accountNumber) throws
+            IllegalBankAccountOperation{
+        if(accountNumber<1000 || accountNumber > 9999)
+            throw new IllegalBankAccountOperation("Invalid Account number. Value should be in " +
+                    "1000-9999");
+    }
+
+    private static void validateAccountBalance(double accountBalance) throws
+            IllegalBankAccountOperation{
+        if(accountBalance<0 || accountBalance>100000)
+            throw new IllegalBankAccountOperation("Invalid Account balance. Value should be in " +
+                    "$0.00-$100,000.00");
+    }
+
+    public static BankAccount enterAccountData()
+            throws IllegalBankAccountOperation{
 
         Scanner sc = new Scanner(System.in);
 
         int accountNumber = 0;
         System.out.print("Enter account number: ");
         accountNumber = sc.nextInt();
-
         if(accountNumber == 0)
             return null;
-        else if(accountNumber<1000 || accountNumber > 9999)
-            throw new IOException("Invalid Account number. Value should be in " +
-                    "1000-9999");
+        else
+            validateAccountNumber(accountNumber);
 
         double accountBalance = 0.0;
         System.out.print("Enter account balance: ");
         accountBalance = sc.nextDouble();
-
-        if(accountBalance<0 || accountBalance>100000)
-            throw new IOException("Invalid Account balance. Value should be in " +
-                    "$0.00-$100,000.00");
+        validateAccountBalance(accountBalance);
 
         return new BankAccount(accountNumber,accountBalance);
+
+    }
+
+    public static BankAccount findBankAccount(BankAccount[] listOfBankAccounts)
+            throws IllegalBankAccountOperation{
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Bank Account number: ");
+        int search = sc.nextInt();
+        validateAccountNumber(search);
+
+        BankAccount toFind = null;
+
+        for(BankAccount account: listOfBankAccounts){
+            if(account.accountNumber == search){
+                toFind = account;
+                break;
+            }
+        }
+
+        if(toFind == null){
+            throw new IllegalBankAccountOperation("No Bank Accounts exist " +
+                    "for the account number which you've entered");
+        } else{
+            return toFind;
+        }
 
     }
 
