@@ -28,11 +28,11 @@ public class BankAccount {
     }
 
     private static boolean isAccountNumberValid(int accountNumber){
-        return accountNumber<1000 || accountNumber > 9999;
+        return accountNumber>1000 && accountNumber < 9999;
     }
 
     private static boolean isAccountBalanceValid(double accountBalance){
-        return accountBalance<0 || accountBalance>100000;
+        return accountBalance>=0 && accountBalance<=100000;
     }
 
     public static BankAccount enterAccountData() throws IllegalBankAccountOperation{
@@ -41,15 +41,17 @@ public class BankAccount {
 
         int accountNumber = 0;
         System.out.print("Enter account number: ");
-        if(!isAccountNumberValid(accountNumber))
-                throw new IllegalBankAccountOperation("Account number should be in the range of 1001-9999");
-
+        accountNumber = sc.nextInt();
+        if (accountNumber == 0)
+            return null;
+        else if(!isAccountNumberValid(accountNumber))
+            throw new IllegalBankAccountOperation("Account number should be in the range of 1001-9999");
 
         double accountBalance = 0.0;
         System.out.print("Enter account balance: ");
         accountBalance = sc.nextDouble();
         if(!isAccountBalanceValid(accountBalance))
-            throw new IllegalBankAccountOperation("Starting account balance should be in the range of 0 - 100,000");
+            throw new IllegalBankAccountOperation("Starting account balance should be in the range of $0 - $100,000");
 
         return new BankAccount(accountNumber,accountBalance);
 

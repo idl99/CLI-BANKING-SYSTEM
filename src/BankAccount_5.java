@@ -39,6 +39,10 @@ public class BankAccount_5 {
 
                                 BankAccount account = BankAccount.enterAccountData();
 
+                                if(account == null){
+                                    break;
+                                }
+
                                 arrayOfBankAccounts[count] = account;
 
                                 count++;
