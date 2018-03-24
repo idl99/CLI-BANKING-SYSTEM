@@ -43,12 +43,9 @@ public class BankAccount_5 {
 
                                 count++;
 
-                                if (account == null)
-                                    break;
-                                else {
-                                    System.out.println("\nBank Account successfully created. Details are as follows: \n");
-                                    account.displayAccount();
-                                }
+                                System.out.println("\nBank Account successfully created. Details are as follows: \n");
+
+                                account.displayAccount();
 
                             } catch (IllegalBankAccountOperation e) {
                                 System.out.println(e.getMessage());
