@@ -3,12 +3,12 @@ import java.util.Scanner;
 public class BankAccount {
     // Class defining Bank account object construct
 
+    // Static variables for Bank Account objects
+    private static double interestRate = 3;
+
     // Instance variables for Bank Account objects
     private int accountNumber;
     private double accountBalance;
-
-    // Static variables for Bank Account objects
-    private static double interestRate = 3;
 
     private BankAccount(int accountNumber, double accountBalance) {
         this.accountNumber = accountNumber;
@@ -25,13 +25,6 @@ public class BankAccount {
 
     public static double getInterestRate() {
         return interestRate;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(super.equals(obj)){
-            return true;
-        } else return this.accountNumber == ((BankAccount) obj).accountNumber;
     }
 
     private static boolean isAccountNumberValid(int accountNumber){
