@@ -14,15 +14,16 @@ public class MoneyTransfer {
      * @param recipient
      * @param amount
      */
-    public void MoneyTransfer(BankAccount transferrer, BankAccount recipient, double amount) {
-        // TODO implement here
+    public MoneyTransfer(BankAccount transferrer, BankAccount recipient, double amount) {
+        this.transferrer = transferrer;
+        this.recipient = recipient;
+        this.amount = amount;
     }
 
     /**
      * @return
      */
     public BankAccount getTransferrer() {
-        // TODO implement here
         return this.transferrer;
     }
 
@@ -30,7 +31,6 @@ public class MoneyTransfer {
      * @return
      */
     public BankAccount getRecipient() {
-        // TODO implement here
         return this.recipient;
     }
 
@@ -38,15 +38,30 @@ public class MoneyTransfer {
      * @return
      */
     public double getAmount() {
-        // TODO implement here
         return this.amount;
     }
 
     /**
      * @return
      */
-    public void process() {
-        // TODO implement here
+    public void process() throws IllegalBankAccountOperation{
+
+        if(transferrer.equals(recipient)){
+            throw new IllegalBankAccountOperation("Both accounts are the same");
+        }
+
+        if(transferrer.getAccountBalance() - this.amount < 0) throw new IllegalBankAccountOperation("Insufficient funds in account. " +
+                "Account Balance is "+String.valueOf(transferrer.getAccountBalance()));
+
+
+        transferrer.decrementBalance(amount);
+        recipient.incrementBalance(amount);
+
+        System.out.printf("AMOUNT OF %,.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
+                        "TRANSFERRER'S NEW ACCOUNT BALANCE IS %,.2f\n\n" +
+                        "RECIPIENT'S NEW ACCOUNT BALANCE IS %,.2f",
+                amount,transferrer.getAccountNumber(),recipient.getAccountNumber(),
+                transferrer.getAccountBalance(), recipient.getAccountBalance());
     }
 
     /**

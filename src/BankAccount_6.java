@@ -17,6 +17,8 @@ public class BankAccount_6 {
                             "WELCOME TO INTERBANKING PTY SYSTEM\n" +
                             "===================================\n" +
                             "1 - CREATE BANK ACCOUNTS\n" +
+                            "2 - MONEY TRANSFER\n" +
+                            "3 - VIEW ACCOUNT BALANCE\n" +
                             "0 - EXIT\n"
             );
 
@@ -75,6 +77,45 @@ public class BankAccount_6 {
                         }
 
                         break; // End of switch case 1
+
+                    case 2:
+
+                        try {
+
+                            System.out.println("TRANSFERRER DETAILS");
+                            BankAccount transferrer = BankAccount.findBankAccount(arrayOfBankAccounts);
+
+                            System.out.println("RECIPIENT DETAILS");
+                            BankAccount recipient = BankAccount.findBankAccount(arrayOfBankAccounts);
+
+                            System.out.print("Enter amount to transfer: ");
+                            double amount = sc.nextDouble();
+
+                            System.out.println();
+
+                            MoneyTransfer transfer = new MoneyTransfer(transferrer,recipient,amount);
+
+                            transfer.process();
+
+                        } catch (IllegalBankAccountOperation e) {
+                            System.out.println(e.getMessage());
+                        }
+
+                        break;
+
+                    case 3:
+
+                        try{
+                            System.out.print("Enter account number to view balance: ");
+                            BankAccount account = BankAccount.findBankAccount(arrayOfBankAccounts);
+
+                            account.displayAccount();
+
+                        } catch (IllegalBankAccountOperation e){
+                            System.out.println(e.getMessage());
+                        }
+
+                        break;
 
                 } // End of switch case
 

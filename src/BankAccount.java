@@ -23,6 +23,14 @@ public class BankAccount {
         return accountBalance;
     }
 
+    public void incrementBalance(double amount){
+        this.accountBalance+=amount;
+    }
+
+    public void decrementBalance(double amount){
+        this.accountBalance-=amount;
+    }
+
     public static double getInterestRate() {
         return interestRate;
     }
@@ -56,6 +64,36 @@ public class BankAccount {
         return new BankAccount(accountNumber,accountBalance);
 
     }
+
+    public static BankAccount findBankAccount(BankAccount[] listOfBankAccounts)
+            throws IllegalBankAccountOperation{
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Bank Account number: ");
+        int search = sc.nextInt();
+        if(!isAccountNumberValid(search)){
+            throw new IllegalBankAccountOperation("Account number should be in the range of 1001-9999");
+        };
+
+        BankAccount toFind = null;
+
+        for(BankAccount account: listOfBankAccounts){
+            if(account.accountNumber == search){
+                toFind = account;
+                break;
+            }
+        }
+
+        if(toFind == null){
+            throw new IllegalBankAccountOperation("No Bank Accounts exist " +
+                    "for the account number which you've entered");
+        } else{
+            return toFind;
+        }
+
+    }
+
 
     public void computeInterest(int years){
 
