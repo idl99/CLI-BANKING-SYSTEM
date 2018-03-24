@@ -59,7 +59,7 @@ public class MoneyTransfer {
 
         System.out.printf("AMOUNT OF %,.2f SUCCESSFULLY TRANSFERRED FROM ACCOUNT NUMBER %d to %d.\n\n" +
                         "TRANSFERRER'S NEW ACCOUNT BALANCE IS %,.2f\n\n" +
-                        "RECIPIENT'S NEW ACCOUNT BALANCE IS %,.2f",
+                        "RECIPIENT'S NEW ACCOUNT BALANCE IS %,.2f\n",
                 amount,transferrer.getAccountNumber(),recipient.getAccountNumber(),
                 transferrer.getAccountBalance(), recipient.getAccountBalance());
     }

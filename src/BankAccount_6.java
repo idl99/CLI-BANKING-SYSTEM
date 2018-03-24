@@ -83,10 +83,10 @@ public class BankAccount_6 {
                         try {
 
                             System.out.println("TRANSFERRER DETAILS");
-                            BankAccount transferrer = BankAccount.findBankAccount(arrayOfBankAccounts);
+                            BankAccount transferrer = BankAccount.findAccount(arrayOfBankAccounts);
 
                             System.out.println("RECIPIENT DETAILS");
-                            BankAccount recipient = BankAccount.findBankAccount(arrayOfBankAccounts);
+                            BankAccount recipient = BankAccount.findAccount(arrayOfBankAccounts);
 
                             System.out.print("Enter amount to transfer: ");
                             double amount = sc.nextDouble();
@@ -106,8 +106,13 @@ public class BankAccount_6 {
                     case 3:
 
                         try{
-                            System.out.print("Enter account number to view balance: ");
-                            BankAccount account = BankAccount.findBankAccount(arrayOfBankAccounts);
+
+                            System.out.println("" +
+                                    "===================================\n" +
+                                    "       VIEW ACCOUNT BALANCE\n" +
+                                    "===================================\n");
+
+                            BankAccount account = BankAccount.findAccount(arrayOfBankAccounts);
 
                             account.displayAccount();
 

@@ -65,7 +65,7 @@ public class BankAccount {
 
     }
 
-    public static BankAccount findBankAccount(BankAccount[] listOfBankAccounts)
+    public static BankAccount findAccount(BankAccount[] listOfBankAccounts)
             throws IllegalBankAccountOperation{
 
         Scanner sc = new Scanner(System.in);
@@ -79,10 +79,14 @@ public class BankAccount {
         BankAccount toFind = null;
 
         for(BankAccount account: listOfBankAccounts){
+
+            if(account == null) break;
+
             if(account.accountNumber == search){
                 toFind = account;
                 break;
             }
+
         }
 
         if(toFind == null){
