@@ -89,12 +89,7 @@ public class BankAccount {
 
         }
 
-        if(toFind == null){
-            throw new IllegalBankAccountOperation("No Bank Accounts exist " +
-                    "for the account number which you've entered");
-        } else{
-            return toFind;
-        }
+        return toFind;
 
     }
 

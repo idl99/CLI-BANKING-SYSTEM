@@ -84,9 +84,17 @@ public class BankAccount_6 {
 
                             System.out.println("TRANSFERRER DETAILS");
                             BankAccount transferrer = BankAccount.findAccount(arrayOfBankAccounts);
+                            if(transferrer == null) {
+                                System.out.println("The transferrer's account number is invalid");
+                                break;
+                            }
 
                             System.out.println("RECIPIENT DETAILS");
                             BankAccount recipient = BankAccount.findAccount(arrayOfBankAccounts);
+                            if(recipient == null) {
+                                System.out.println("The recipient's account number is invalid");
+                                break;
+                            }
 
                             System.out.print("Enter amount to transfer: ");
                             double amount = sc.nextDouble();
@@ -96,6 +104,7 @@ public class BankAccount_6 {
                             MoneyTransfer transfer = new MoneyTransfer(transferrer,recipient,amount);
 
                             transfer.process();
+
 
                         } catch (IllegalBankAccountOperation e) {
                             System.out.println(e.getMessage());
@@ -117,7 +126,7 @@ public class BankAccount_6 {
                             account.displayAccount();
 
                         } catch (IllegalBankAccountOperation e){
-                            System.out.println(e.getMessage());
+                            System.out.println("No accounts exist for the account number you've entered");
                         }
 
                         break;
