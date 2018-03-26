@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class BankAccount_6 {
+public class BankAccount_7 {
 
     public static void main(String[] args) {
 
