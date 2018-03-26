@@ -10,6 +10,10 @@ public class BankAccount_7 {
         int count = 0; // Count variable to count the number of existing
         // Bank Account objects in arrayOfBankAccounts
 
+        // TODO: add login implementation
+
+        // TODO: get details of Bank Branch
+
         while (true) { // Program Main Loop
 
             System.out.println(
@@ -33,13 +37,12 @@ public class BankAccount_7 {
                 switch (opt) {
                     case 1:
                         while (count != 10) {
+                            // TODO: add functionality to add any type of BankAccounts
                             try {
-
                                 System.out.println("===================================\n" +
                                         "       NEW BANK ACCOUNT FORM \n" +
                                         "===================================\n");
-
-                                BankAccount account = BankAccount.enterAccountData();
+                                BankAccount account = new BankAccount(0.0,null);
 
                                 if(account == null){
                                     break;
@@ -59,21 +62,6 @@ public class BankAccount_7 {
 
                             if (count == 10) break;
 
-                        }
-
-                        int term = 0;
-                        while (true) {
-                            System.out.print("\nEnter no. of years for which you wish to compute interest: ");
-                            term = sc.nextInt();
-                            if (term < 1 || term > 40) System.out.println("Invalid input. Number of years should be in 1-40");
-                            else break;
-                        }
-
-                        System.out.println();
-
-                        for (BankAccount account : arrayOfBankAccounts) {
-                            if (account != null)
-                                account.computeInterest(term);
                         }
 
                         break; // End of switch case 1
@@ -138,5 +126,9 @@ public class BankAccount_7 {
         } // End of Program Main Loop
 
     } // End of main method
+
+    public static void produceReport(){
+        // TODO: method to handle generating of report
+    }
 
 } // End of class

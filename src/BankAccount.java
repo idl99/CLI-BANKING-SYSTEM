@@ -4,15 +4,26 @@ public class BankAccount {
     // Class defining Bank account object construct
 
     // Static variables for Bank Account objects
-    private static double interestRate = 3;
 
     // Instance variables for Bank Account objects
     private int accountNumber;
     private double accountBalance;
+    private BankBranch homeBranch;
 
-    private BankAccount(int accountNumber, double accountBalance) {
-        this.accountNumber = accountNumber;
+    protected BankAccount(double accountBalance, BankBranch homeBranch)
+            throws IllegalBankAccountOperation{
+
+        this.accountNumber = (int)(1001 + (Math.random()*(9999-1001))+1);
+
+        if(isAccountBalanceValid(accountBalance))
+            this.accountBalance = accountBalance;
+        else
+            throw new IllegalBankAccountOperation("Invalid starting balance. " +
+                    "Value should be in $0 - $100,000");
+
         this.accountBalance = accountBalance;
+        this.homeBranch = homeBranch;
+
     }
 
     public int getAccountNumber() {
@@ -23,16 +34,16 @@ public class BankAccount {
         return accountBalance;
     }
 
+    public BankBranch getHomeBranch() {
+        return homeBranch;
+    }
+
     public void incrementBalance(double amount){
         this.accountBalance+=amount;
     }
 
     public void decrementBalance(double amount){
         this.accountBalance-=amount;
-    }
-
-    public static double getInterestRate() {
-        return interestRate;
     }
 
     private static boolean isAccountNumberValid(int accountNumber){
@@ -44,6 +55,8 @@ public class BankAccount {
     }
 
     public static BankAccount enterAccountData() throws IllegalBankAccountOperation{
+
+        // TODO: Revise this method
 
         Scanner sc = new Scanner(System.in);
 
@@ -61,9 +74,10 @@ public class BankAccount {
         if(!isAccountBalanceValid(accountBalance))
             throw new IllegalBankAccountOperation("Starting account balance should be in the range of $0 - $100,000");
 
-        return new BankAccount(accountNumber,accountBalance);
+        return new BankAccount(accountBalance,null);
 
     }
+
 
     public static BankAccount findAccount(BankAccount[] listOfBankAccounts)
             throws IllegalBankAccountOperation{
@@ -93,31 +107,13 @@ public class BankAccount {
 
     }
 
-
-    public void computeInterest(int years){
-
-        System.out.printf("<<<<<<<<<< ACCOUNT NUMBER : %d >>>>>>>>>>\n\n",this.accountNumber);
-
-        System.out.println("YEAR \t\t STARTING BALANCE \t\t ENDING BALANCE\n");
-
-        double balance = this.accountBalance;
-
-        for(int i=1; i<=years;i++){
-            System.out.printf("%d  \t\t\t %,.2f \t\t\t\t",i,balance);
-            double interest = balance * BankAccount.interestRate/100;
-            balance += interest;
-            System.out.printf(" %,.2f\n\n",balance);
-        }
-
-    }
-
     public void displayAccount(){
-
-        System.out.println("<<<<<<<<<< ACCOUNT DETAILS >>>>>>>>>>\n");
 
         System.out.printf("Account number: %d \n",this.accountNumber);
 
         System.out.printf("Account balance: %,.2f \n",this.accountBalance);
+
+        System.out.println(this.homeBranch.toString());
 
         System.out.println();
 
