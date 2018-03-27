@@ -1,10 +1,12 @@
+package BankAccounts;
+
 public class CheckingAccount_w_Interest extends SavingsAccount{
 
-    public CheckingAccount_w_Interest(double balance, BankBranch homeBranch)
-            throws IllegalBankAccountOperation{
+    public CheckingAccount_w_Interest(double balance, BankBranch homeBranch){
         super(balance,homeBranch,0.02);
     }
 
+    // TODO: complete displayAccount() in CheckingAccountW/Interest
     @Override
     public void displayAccount() {
         System.out.println("" +
@@ -13,4 +15,5 @@ public class CheckingAccount_w_Interest extends SavingsAccount{
                 "========================================");
         ((BankAccount)this).displayAccount();
     }
+
 }

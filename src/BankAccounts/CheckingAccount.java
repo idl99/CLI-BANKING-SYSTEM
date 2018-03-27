@@ -1,19 +1,15 @@
-import java.util.Scanner;
+package BankAccounts;
 
 public class CheckingAccount extends BankAccount{
 
     private double monthlyFee;
     private int noOfChecksAllowed;
 
-    protected CheckingAccount(double accountBalance, BankBranch homeBranch) throws IllegalBankAccountOperation {
+    public CheckingAccount(double accountBalance, BankBranch homeBranch,
+                              double monthlyFee, int noOfChecksAllowed ) {
         super(accountBalance, homeBranch);
-
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter monthly fee: ");
-        this.monthlyFee = sc.nextDouble();
-
-        System.out.print("Enter number of checks/month: ");
-        this.noOfChecksAllowed = sc.nextInt();
+        this.monthlyFee = monthlyFee;
+        this.noOfChecksAllowed = noOfChecksAllowed;
     }
 
     public double getMonthlyFee() {

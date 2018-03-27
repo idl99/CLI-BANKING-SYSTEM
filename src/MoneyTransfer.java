@@ -1,3 +1,6 @@
+import BankAccounts.BankAccount;
+import Exceptions.IllegalBankAccountOperation;
+
 public class MoneyTransfer {
 
     // Instance variables
@@ -23,7 +26,7 @@ public class MoneyTransfer {
         return this.amount;
     }
 
-    public void process() throws IllegalBankAccountOperation{
+    public void process() throws IllegalBankAccountOperation {
 
         if(transferrer.equals(recipient)){
             throw new IllegalBankAccountOperation("Both accounts are the same");
