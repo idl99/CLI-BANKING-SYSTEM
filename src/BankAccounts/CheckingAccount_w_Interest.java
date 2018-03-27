@@ -2,11 +2,12 @@ package BankAccounts;
 
 public class CheckingAccount_w_Interest extends SavingsAccount{
 
+    private final static double INTEREST_RATE = 0.02;
+
     public CheckingAccount_w_Interest(double balance, BankBranch homeBranch){
-        super(balance,homeBranch,0.02);
+        super(balance,homeBranch, INTEREST_RATE);
     }
 
-    // TODO: complete displayAccount() in CheckingAccountW/Interest
     @Override
     public void displayAccount() {
         System.out.println("" +
@@ -14,6 +15,8 @@ public class CheckingAccount_w_Interest extends SavingsAccount{
                 "CHECKING ACCOUNT W/ INTEREST DETAILS" +
                 "========================================");
         ((BankAccount)this).displayAccount();
+        System.out.printf("Interest rate: %.2f%% ",this.INTEREST_RATE *100);
+
     }
 
 }
