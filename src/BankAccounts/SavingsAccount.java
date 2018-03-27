@@ -28,7 +28,7 @@ public class SavingsAccount extends BankAccount {
                 "   SAVINGS ACCOUNT DETAILS\n" +
                 "==============================");
         super.displayAccount();
-        System.out.printf("Interest rate: %.2f%% ",this.interestRate*100);
+        System.out.printf("Interest rate: %.2f%% \n",this.interestRate*100);
     }
 
 }

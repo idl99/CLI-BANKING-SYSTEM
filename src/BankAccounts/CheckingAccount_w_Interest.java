@@ -12,10 +12,10 @@ public class CheckingAccount_w_Interest extends SavingsAccount{
     public void displayAccount() {
         System.out.println("" +
                 "========================================\n" +
-                "CHECKING ACCOUNT W/ INTEREST DETAILS" +
+                "CHECKING ACCOUNT W/ INTEREST DETAILS\n" +
                 "========================================");
-        ((BankAccount)this).displayAccount();
-        System.out.printf("Interest rate: %.2f%% ",this.INTEREST_RATE *100);
+        super.displayAccount();
+        System.out.printf("Interest rate: %.2f%% \n",this.INTEREST_RATE *100);
 
     }
 

@@ -41,7 +41,8 @@ public class BankBranch {
         return "-----------------------------------\n" +
                 "       Bank Branch Details         " +
                 "\nBSB Number = " + BSB_Number +
-                "\nAddress = " + address + '\'' +
-                "\nPostcode = " + postcode;
+                "\nAddress = " + address +
+                "\nPostcode = " + postcode +
+                "\n-----------------------------------";
     }
 }

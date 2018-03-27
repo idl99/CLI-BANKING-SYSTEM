@@ -1,5 +1,6 @@
 import BankAccounts.BankAccount;
 import BankAccounts.BankBranch;
+import BankAccounts.CheckingAccount_w_Interest;
 import Exceptions.IllegalBankAccountOperation;
 import java.util.Scanner;
 
@@ -32,7 +33,7 @@ public class BankAccount_7 {
         System.out.println("\n" +
                 "==============================\n" +
                 "   DETAILS OF BANK BRANCH\n" +
-                "==============================");
+                "==============================\n");
         System.out.print("BSB Number: ");
         int BSB_Number = sc.nextInt();
         sc.nextLine();
@@ -65,10 +66,24 @@ public class BankAccount_7 {
 
             switch (opt) {
                 case 1:
-                    while (count != 10) {
+                    while (count != 5) {
                         // TODO: add functionality to add any type of BankAccounts
+
+                        System.out.println("" +
+                                "===================================\n" +
+                                "       NEW BANK ACCOUNT FORM \n" +
+                                "===================================\n");
+
+                        System.out.print("Enter starting balance: ");
+                        double balance = sc.nextDouble();
+
+                        BankAccount account = new CheckingAccount_w_Interest(balance,branch);
+
+                        arrayOfBankAccounts[count] = account;
+
+                        account.displayAccount();
+
                         count++;
-                        if (count == 10) break;
                     }
 
                     break; // End of switch case 1
