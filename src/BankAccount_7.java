@@ -1,7 +1,6 @@
 import BankAccounts.BankAccount;
 import BankAccounts.BankBranch;
 import Exceptions.IllegalBankAccountOperation;
-
 import java.util.Scanner;
 
 public class BankAccount_7 {
@@ -16,7 +15,6 @@ public class BankAccount_7 {
         int count = 0; // Count variable to count the number of existing
         // Bank Account objects in arrayOfBankAccounts
 
-        // TODO: add login implementation
         System.out.println("" +
                 "===================================\n" +
                 "   INTERBANKING PTY SYSTEM LOGIN\n" +
@@ -31,14 +29,13 @@ public class BankAccount_7 {
             System.exit(0);
         }
 
-        // TODO: get details of Bank Branch
-
-        System.out.println("" +
+        System.out.println("\n" +
                 "==============================\n" +
                 "   DETAILS OF BANK BRANCH\n" +
                 "==============================");
         System.out.print("BSB Number: ");
         int BSB_Number = sc.nextInt();
+        sc.nextLine();
         System.out.print("Address: ");
         String address = sc.nextLine();
         System.out.print("Postcode: ");
@@ -48,7 +45,7 @@ public class BankAccount_7 {
 
         while (true) { // Program Main Loop
 
-            System.out.println(
+            System.out.println("\n"+
                     "===================================\n" +
                             "WELCOME TO INTERBANKING PTY SYSTEM\n" +
                             "===================================\n" +
@@ -80,15 +77,17 @@ public class BankAccount_7 {
 
                     try {
 
-                        System.out.println("TRANSFERRER DETAILS");
-                        BankAccount transferrer = BankAccount.findAccount(arrayOfBankAccounts);
+                        System.out.print("Enter transferrer's account number: ");
+                        int number1 = sc.nextInt();
+                        BankAccount transferrer = BankAccount.findAccount(number1,arrayOfBankAccounts);
                         if (transferrer == null) {
                             System.out.println("The transferrer's account number is invalid");
                             break;
                         }
 
-                        System.out.println("RECIPIENT DETAILS");
-                        BankAccount recipient = BankAccount.findAccount(arrayOfBankAccounts);
+                        System.out.print("Enter account number: ");
+                        int number2 = sc.nextInt();
+                        BankAccount recipient = BankAccount.findAccount(number2,arrayOfBankAccounts);
                         if (recipient == null) {
                             System.out.println("The recipient's account number is invalid");
                             break;
@@ -118,7 +117,10 @@ public class BankAccount_7 {
                                 "       VIEW ACCOUNT BALANCE\n" +
                                 "===================================\n");
 
-                        BankAccount account = BankAccount.findAccount(arrayOfBankAccounts);
+                        System.out.print("Enter account number: ");
+                        int search = sc.nextInt();
+
+                        BankAccount account = BankAccount.findAccount(search,arrayOfBankAccounts);
 
                         if (account == null)
                             throw new IllegalBankAccountOperation("No accounts exist " +

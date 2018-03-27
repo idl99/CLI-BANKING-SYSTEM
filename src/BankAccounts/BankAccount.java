@@ -1,7 +1,5 @@
 package BankAccounts;
 
-import java.util.Scanner;
-
 public class BankAccount {
 
     // Class defining Bank account object construct
@@ -50,12 +48,7 @@ public class BankAccount {
         this.accountBalance-=amount;
     }
 
-    public static BankAccount findAccount(BankAccount[] listOfBankAccounts){
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter Bank Account number: ");
-        int search = sc.nextInt();
-
+    public static BankAccount findAccount(int search, BankAccount[] listOfBankAccounts){
         BankAccount toFind = null;
 
         for(BankAccount account: listOfBankAccounts){
@@ -66,10 +59,8 @@ public class BankAccount {
                 break;
             }
         }
-
         return toFind; // returns null if account not found, else
                         // returns relevant Bank Account
-
     }
 
     public void displayAccount(){
