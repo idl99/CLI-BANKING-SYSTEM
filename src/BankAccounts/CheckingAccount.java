@@ -30,14 +30,18 @@ public class CheckingAccount extends BankAccount{
 
     @Override
     public void displayAccount() {
-        System.out.println("" +
-                "==============================\n" +
-                "   CHECKING ACCOUNT DETAILS\n" +
-                "==============================\n");
+        String invoking =  Thread.currentThread().getStackTrace()[2].getClassName();
+        if(!invoking.equals("BankAccounts.CheckingAccount_W_Interest")) {
+            System.out.println("\n" +
+                    "==============================\n" +
+                    "   CHECKING ACCOUNT DETAILS\n" +
+                    "==============================\n");
+        }
         super.displayAccount();
         System.out.printf("" +
                 "Monthly fee: %,.2f\n" +
-                "No of checks allowed monthly: %d\n",this.monthlyFee,this.noOfChecksAllowed);
+                "No of checks allowed monthly: %d\n" +
+                "\n",this.monthlyFee,this.noOfChecksAllowed);
     }
 
 }
