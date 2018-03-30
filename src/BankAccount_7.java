@@ -1,6 +1,7 @@
 import BankAccounts.*;
 import Exceptions.IllegalBankAccountOperation;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,8 +10,6 @@ public class BankAccount_7 {
     static BankBranch branch;
 
     public static void main(String[] args) {
-
-        // TODO: add validations
 
         Scanner sc = new Scanner(System.in);
 
@@ -71,31 +70,45 @@ public class BankAccount_7 {
                 case 1:
                     while (count != 5) {
 
-                        // TODO: support any type of accounts?
+                        try {
+                            // TODO: support any type of accounts?
 
-                        System.out.println("" +
-                                "===================================\n" +
-                                "       NEW BANK ACCOUNT FORM \n" +
-                                "===================================\n");
+                            System.out.println("" +
+                                    "===================================\n" +
+                                    "       NEW BANK ACCOUNT FORM \n" +
+                                    "===================================\n");
 
-                        System.out.print("Enter starting balance: ");
-                        double balance = sc.nextDouble();
+                            System.out.print("Enter starting balance: ");
+                            double balance = sc.nextDouble();
 
-                        System.out.print("Enter monthly fee: ");
-                        double monthlyFee = sc.nextDouble();
+                            System.out.print("Enter monthly fee: ");
+                            double monthlyFee = sc.nextDouble();
 
-                        System.out.print("Enter numbers of checks allowed: ");
-                        int noOfChecks = sc.nextInt();
+                            System.out.print("Enter numbers of checks allowed: ");
+                            int noOfChecks = sc.nextInt();
+                            sc.nextLine();
 
-                        BankAccount account = new CheckingAccount_W_Interest(balance,branch,
-                                monthlyFee, noOfChecks);
+                            BankAccount account = new CheckingAccount_W_Interest(balance,branch,
+                                    monthlyFee, noOfChecks);
 
-                        arrayOfBankAccounts[count] = account;
+                            arrayOfBankAccounts[count] = account;
 
-                        account.displayAccount();
+                            account.displayAccount();
 
-                        count++;
+                            count++;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input. Please try again.");
+                        }
+
+                        System.out.print("Do you wish to add any more accounts [Y]/[N]: ");
+                        char _continue = sc.nextLine().charAt(0);
+
+                        if(_continue=='N'||_continue=='n')
+                            break;
+
                     }
+
+                    System.out.println("Maximum number of Bank accounts have been entered");
 
                     break; // End of switch case 1
 
@@ -168,26 +181,6 @@ public class BankAccount_7 {
                     System.out.print("Enter title of report: ");
                     String title = sc.nextLine();
                     System.out.println();
-
-                    // TEST DATA
-                    /*list.add(new CheckingAccount_W_Interest(2000,
-                            new BankBranch(1,"Dehiwala", 10350),
-                            200,10));
-                    list.add(new SavingsAccount(2000,
-                            new BankBranch(1,"Dehiwala", 10350)));
-                    list.add(new CheckingAccount(10000,
-                            new BankBranch(1,"Dehiwala", 10350),
-                            200,10));
-                    list.add(new CheckingAccount(10000,
-                            new BankBranch(1,"Dehiwala", 10350),
-                            200,10));
-                    list.add(new SavingsAccount(2000,
-                            new BankBranch(1,"Dehiwala", 10350)));
-                    list.add(new CheckingAccount_W_Interest(2000,
-                            new BankBranch(1,"Dehiwala", 10350),
-                            200,10));
-                    */
-
 
                     while(true){
 
