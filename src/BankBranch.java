@@ -1,17 +1,20 @@
-package BankAccounts;
-
 public class BankBranch {
 
+    // Class defining construct for Bank Branch
+
+    // Instance attributes of Bank Branch
     private int BSB_Number;
     private String address;
     private int postcode;
 
+    // Non default constructor
     public BankBranch(int BSB_Number, String address, int postcode) {
         this.BSB_Number = BSB_Number;
         this.address = address;
         this.postcode = postcode;
     }
 
+    // Getters and setters
     public int getBSB_Number() {
         return BSB_Number;
     }

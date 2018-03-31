@@ -1,6 +1,3 @@
-import BankAccounts.BankAccount;
-import Exceptions.IllegalBankAccountOperation;
-
 public class MoneyTransfer {
 
     // Instance variables

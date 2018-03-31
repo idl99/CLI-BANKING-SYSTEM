@@ -1,5 +1,3 @@
-import BankAccounts.*;
-import Exceptions.IllegalBankAccountOperation;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -88,7 +86,7 @@ public class BankAccount_7 {
                             int noOfChecks = sc.nextInt();
                             sc.nextLine();
 
-                            BankAccount account = new CheckingAccount_W_Interest(balance,branch,
+                            BankAccount account = new CheckingAccountWithInterest(balance,branch,
                                     monthlyFee, noOfChecks);
 
                             arrayOfBankAccounts[count] = account;
@@ -159,8 +157,8 @@ public class BankAccount_7 {
                         System.out.print("Enter account number: ");
                         int search = sc.nextInt();
 
-                        CheckingAccount_W_Interest account =
-                                (CheckingAccount_W_Interest) BankAccount.findAccount(search,arrayOfBankAccounts);
+                        CheckingAccountWithInterest account =
+                                (CheckingAccountWithInterest) BankAccount.findAccount(search,arrayOfBankAccounts);
 
                         if (account == null)
                             throw new IllegalBankAccountOperation("No accounts exist " +
@@ -226,8 +224,8 @@ public class BankAccount_7 {
 
             if(account instanceof SavingsAccount){
                 System.out.printf("%-20.2f",((SavingsAccount)account).getInterestRate()*100);
-            } else if(account instanceof CheckingAccount_W_Interest){
-                System.out.printf("%-20.2f",((CheckingAccount_W_Interest)account).getInterestRate()*100);
+            } else if(account instanceof CheckingAccountWithInterest){
+                System.out.printf("%-20.2f",((CheckingAccountWithInterest)account).getInterestRate()*100);
             } else{
                 System.out.printf("%-20s","-");
             }

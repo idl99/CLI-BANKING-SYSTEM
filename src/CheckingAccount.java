@@ -1,10 +1,12 @@
-package BankAccounts;
+public class CheckingAccount extends BankAccount {
 
-public class CheckingAccount extends BankAccount{
+    // Class defining construct for Checking Accounts
 
+    // Instance attributes for Checking Accounts
     private double monthlyFee;
     private int noOfChecksAllowed;
 
+    // Non default constructor for Checking Accounts
     public CheckingAccount(double accountBalance, BankBranch homeBranch,
                               double monthlyFee, int noOfChecksAllowed ) {
         super(accountBalance, homeBranch);
@@ -12,6 +14,7 @@ public class CheckingAccount extends BankAccount{
         this.noOfChecksAllowed = noOfChecksAllowed;
     }
 
+    // Getters and setters
     public double getMonthlyFee() {
         return monthlyFee;
     }
@@ -31,7 +34,7 @@ public class CheckingAccount extends BankAccount{
     @Override
     public void displayAccount() {
         String invoking =  Thread.currentThread().getStackTrace()[2].getClassName();
-        if(!invoking.equals("BankAccounts.CheckingAccount_W_Interest")) {
+        if(!invoking.equals("CheckingAccountWithInterest")) {
             System.out.println("\n" +
                     "==============================\n" +
                     "   CHECKING ACCOUNT DETAILS\n" +

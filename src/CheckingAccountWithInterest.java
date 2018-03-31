@@ -1,14 +1,17 @@
-package BankAccounts;
+public class CheckingAccountWithInterest extends CheckingAccount {
 
-public class CheckingAccount_W_Interest extends CheckingAccount{
+    // Class defining construct for special Checking Accounts with Interest
 
+    // Interest Rate to be forced for all Checking Accounts with Interest
     private final static double INTEREST_RATE = 0.02;
 
-    public CheckingAccount_W_Interest(double balance, BankBranch homeBranch,
-                                      double monthlyFee, int noOfChecksAllowed){
+    // Non default constructor
+    public CheckingAccountWithInterest(double balance, BankBranch homeBranch,
+                                       double monthlyFee, int noOfChecksAllowed){
         super(balance,homeBranch, monthlyFee, noOfChecksAllowed);
     }
 
+    // Getter method for interest rate
     public static double getInterestRate() {
         return INTEREST_RATE;
     }
