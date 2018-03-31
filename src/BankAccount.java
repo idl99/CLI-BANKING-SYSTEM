@@ -1,8 +1,6 @@
-package BankAccounts;
+public abstract class BankAccount {
 
-public class BankAccount {
-
-    // Class defining Bank account object construct
+    // Abstract class that defines the abstract behavior of Bank Accounts of any type
 
     /*
     * Contains the abstract attributes of any Bank Account type, which is
@@ -11,23 +9,24 @@ public class BankAccount {
     *   Details of the Branch at which the account was opened - "homeBranch"
     */
 
-    // Instance variables for Bank Account objects
+    // Instance attributes for Bank Accounts
     private int accountNumber;
     private double accountBalance;
     private BankBranch homeBranch;
 
     /*
-    * Constructor for Bank Account class
+    * Constructor to initialize abstract Bank Account attributes
     * Accepts 2 parameters: accountBalance, and homeBranch
     * accountNumber is automatically generated at time of object creation
-    * Protected in order to avoid BankAccout objects being created from outer classes
     */
+
     protected BankAccount(double accountBalance, BankBranch homeBranch) {
         this.accountNumber = (int)(1001 + (Math.random()*(9999-1001))+1);
         this.accountBalance = accountBalance;
         this.homeBranch = homeBranch;
     }
 
+    // Getter methods for Bank account object
     public int getAccountNumber() {
         return accountNumber;
     }
@@ -40,6 +39,7 @@ public class BankAccount {
         return homeBranch;
     }
 
+    // Methods to increment balance or delete methods
     public void incrementBalance(double amount){
         this.accountBalance+=amount;
     }
@@ -48,13 +48,12 @@ public class BankAccount {
         this.accountBalance-=amount;
     }
 
-    public static BankAccount findAccount(int search, BankAccount[] listOfBankAccounts){
-        BankAccount toFind = null;
-
-        for(BankAccount account: listOfBankAccounts){
+    public static <T extends BankAccount> T findAccount(int search, T[] listOfBankAccounts){
+        T toFind = null;
+        for(T account: listOfBankAccounts){
             if(account == null) break;
 
-            if(account.accountNumber == search){
+            if(account.getAccountNumber() == search){
                 toFind = account;
                 break;
             }
