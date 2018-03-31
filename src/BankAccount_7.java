@@ -118,16 +118,14 @@ public class BankAccount_7 {
                         int number1 = sc.nextInt();
                         BankAccount transferrer = BankAccount.findAccount(number1,arrayOfBankAccounts);
                         if (transferrer == null) {
-                            System.out.println("The transferrer's account number is invalid");
-                            break;
+                            throw new IllegalBankAccountOperation("The transferrer's account number is invalid");
                         }
 
                         System.out.print("Enter account number: ");
                         int number2 = sc.nextInt();
                         BankAccount recipient = BankAccount.findAccount(number2,arrayOfBankAccounts);
                         if (recipient == null) {
-                            System.out.println("The recipient's account number is invalid");
-                            break;
+                            throw new IllegalBankAccountOperation("The recipient's account number is invalid");
                         }
 
                         System.out.print("Enter amount to transfer: ");
@@ -182,11 +180,19 @@ public class BankAccount_7 {
 
                     while(true){
 
-                        System.out.print("Enter account number to be reported: ");
-                        int accountNumber = sc.nextInt();
-                        sc.nextLine();
-                        BankAccount account = BankAccount.findAccount(accountNumber,arrayOfBankAccounts);
-                        list.add(account);
+                        try {
+                            System.out.print("Enter account number to be reported: ");
+                            int accountNumber = sc.nextInt();
+                            sc.nextLine();
+                            BankAccount account = BankAccount.findAccount(accountNumber,arrayOfBankAccounts);
+                            if(account == null){
+                                throw new IllegalBankAccountOperation("Account not found for the number you've entered");
+                            }
+                            list.add(account);
+
+                        } catch (IllegalBankAccountOperation e) {
+                            System.out.println(e.getMessage());
+                        }
 
                         System.out.print("Any more accounts? [Y]/[N] : ");
                         String _continue = sc.nextLine();
@@ -194,6 +200,8 @@ public class BankAccount_7 {
                             break;
 
                     }
+
+                    System.out.println();
 
                     produceReport(title,list);
 
@@ -211,7 +219,7 @@ public class BankAccount_7 {
         System.out.printf("" +
                 "===========================================================\n" +
                 "          REPORT: %-50s\n" +
-                "===========================================================\n\n\n",title);
+                "===========================================================\n\n",title);
 
         System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s\n" +
                         "===================================================================================================================\n",
