@@ -106,7 +106,8 @@ public class BankAccount_7 {
 
                     }
 
-                    System.out.println("Maximum number of Bank accounts have been entered");
+                    if(count==5)
+                        System.out.println("Maximum number of Bank accounts have been entered");
 
                     break; // End of switch case 1
 
