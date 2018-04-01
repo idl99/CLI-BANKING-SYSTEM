@@ -69,7 +69,6 @@ public class BankAccount_7 {
                     while (count != 5) {
 
                         try {
-                            // TODO: support any type of accounts?
 
                             System.out.println("" +
                                     "===================================\n" +
@@ -215,7 +214,6 @@ public class BankAccount_7 {
     } // End of main method
 
     public static <T extends BankAccount> void produceReport(String title, List<T> accountsOfCustomer) {
-        // TODO: method to handle generating of report
 
         System.out.printf("" +
                 "===========================================================\n" +
@@ -223,7 +221,7 @@ public class BankAccount_7 {
                 "===========================================================\n\n",title);
 
         System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s\n" +
-                        "===================================================================================================================\n",
+                        "===========================WW========================================================================================\n",
                 "Account Number","Branch","Balance","Interest%","Monthly Fee","No Of Checks");
 
         for(BankAccount account:accountsOfCustomer){

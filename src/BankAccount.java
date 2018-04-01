@@ -63,7 +63,6 @@ public abstract class BankAccount {
     }
 
     public void displayAccount(){
-        // TODO: fix displayAccount methods of all BankAccount types
         System.out.printf("Account number: %d \n",this.accountNumber);
         System.out.printf("Account balance: %,.2f \n",this.accountBalance);
         System.out.println(homeBranch.toString());
