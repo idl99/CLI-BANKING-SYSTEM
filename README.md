@@ -1,10 +1,2 @@
-# Programming Principles 02
-## Coursework 1 - Interbanking Pty
-
-By
-
-Ihan Lelwala,
-
-Tutorial Group B,
-
-SE/CS Batch September 17
+# CLI based Banking System
+## A CLI based Banking System developed to sharpen my skills in Java.
